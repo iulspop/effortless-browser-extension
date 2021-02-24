@@ -28,14 +28,6 @@ let title = (function() {
   return title;
 })()
 
-// (function() {
-
-// })()
-
-// (function() {
-
-// })()
-
 form = (function() {
   let form = document.createElement("form");
 
