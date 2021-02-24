@@ -1,5 +1,5 @@
-
-let bubble = (function() {
+(function() {
+  let bubble = (function() {
   let bubble = document.createElement("div");
   bubble.style.cssText = `
   width: 350px;
@@ -28,7 +28,7 @@ let title = (function() {
   return title;
 })()
 
-form = (function() {
+let form = (function() {
   let form = document.createElement("form");
 
   let item = (function() {
@@ -76,3 +76,4 @@ bubble.appendChild(title);
 bubble.appendChild(form);
 
 document.body.appendChild(bubble);
+})()
