@@ -75,5 +75,6 @@
   bubble.appendChild(title);
   bubble.appendChild(form);
 
+  console.log('append this');
   document.body.appendChild(bubble);
 })()
