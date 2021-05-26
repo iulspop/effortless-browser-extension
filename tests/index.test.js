@@ -1,23 +1,28 @@
 const { Goal, Count } = require('../extension/core/index');
 
-test('can set goal', () => {
+test('Can set goal', () => {
   goal = new Goal();
   goal.set('Eat pie');
   expect(goal.show()).toEqual('Eat pie');
 });
 
-test('can mark goal complete', () => {
+test('Can mark goal complete', () => {
   goal = new Goal();
   goal.set('Eat pie');
   goal.complete()
   expect(goal.show()).toEqual(undefined);
 });
 
-test('can mark goal interupted', () => {
+test('Can mark goal interupted', () => {
   goal = new Goal();
   goal.set('Eat pie');
   goal.interupt()
   expect(goal.show()).toEqual(undefined);
+});
+
+test('Can start count at any number', () => {
+  count = new Count(50);
+  expect(count.value).toEqual(50);
 });
 
 test('Can increment count', () => {

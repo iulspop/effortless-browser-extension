@@ -17,8 +17,8 @@ Goal.prototype.interupt = function() {
   this.description = undefined;
 };
 
-function Count() {
-  this.value = 0;
+function Count(value = 0) {
+  this.value = value;
 };
 
 Count.prototype.increment = function() {
