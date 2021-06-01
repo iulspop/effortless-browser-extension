@@ -3,8 +3,7 @@
   "description": "Augment your cognitive control abilities",
   "version": "1.0",
   "manifest_version": 3,
-  "permissions": [ "webNavigation", "scripting" ],
-  "host_permissions": ["<all_urls>"],
+  "permissions": ["storage"],
   "action": {
     "default_popup": "popup.html"
   }
