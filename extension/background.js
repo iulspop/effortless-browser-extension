@@ -1,9 +1,13 @@
-chrome.runtime.onMessage.addListener(
-  function(request) {
-    if (request.goalSet === true) {
-      chrome.storage.local.get(['goal'], (items) => {
-        return items.goal;
-      });
-    }
-  }
-);
+chrome.webNavigation.onCompleted.addListener((details) => {
+  chrome.storage.local.get(['goal'], (items) => {
+    if (items.goal) {
+      chrome.scripting.executeScript(
+        {
+          target: {tabId: details.tabId},
+          files: ['createBubble.js'],
+        },
+        () => {}
+      );
+    };
+  });
+});
