@@ -16,8 +16,11 @@ function createElement(type, props = {}, children = []) {
 
   const description = createElement("p", {textContent: goal});
   description.style = `
-  font-family: sans-serif;
-  font-size: 20px;
+  font-family: sans-serif !important;
+  font-size: 20px !important;
+  line-height: 1 !important;
+  padding: 0 !important;
+  margin: 0 !important;
   text-align: center;
 
   position: absolute;
@@ -26,19 +29,48 @@ function createElement(type, props = {}, children = []) {
   transform: translate(-50%, -50%);
 `;
 
-  const box = createElement("div", {}, [description]);
+  const box = createElement("div", {id: "boxturtle"}, [description]);
   box.style = `
-  width: 120px;
+  width: 100vw;
   height: 60px;
   padding: 0;
   background-color: #FF91AF;
-  border-radius: 7%;
 
   position: fixed;
-  left: 20px;
-  top: 20px;
+  left: 0px;
+  top: 0px;
   z-index: 999999999999;
 `
 
   document.body.appendChild(box);
+
+  document.body.addEventListener("mousemove", (event) => {
+      if (event.y < 80) {
+        box.style = `
+        visibility: hidden;
+        width: 100vw;
+        height: 60px;
+        padding: 0;
+        background-color: #FF91AF;
+      
+        position: fixed;
+        left: 0px;
+        top: 0px;
+        z-index: 999999999999;
+      `
+      } else {
+        box.style = `
+        visibility: visible;
+        width: 100vw;
+        height: 60px;
+        padding: 0;
+        background-color: #FF91AF;
+      
+        position: fixed;
+        left: 0px;
+        top: 0px;
+        z-index: 999999999999;
+      `
+      };
+ });
 })()
