@@ -47,30 +47,30 @@ function createElement(type, props = {}, children = []) {
   document.body.addEventListener("mousemove", (event) => {
       if (event.y < 80) {
         box.style = `
-        visibility: hidden;
-        width: 100vw;
-        height: 60px;
-        padding: 0;
-        background-color: #FF91AF;
-      
-        position: fixed;
-        left: 0px;
-        top: 0px;
-        z-index: 999999999999;
-      `
+          visibility: hidden;
+          width: 100vw;
+          height: 60px;
+          padding: 0;
+          background-color: #FF91AF;
+
+          position: fixed;
+          left: 0px;
+          top: 0px;
+          z-index: 999999999999;
+        `
       } else {
         box.style = `
-        visibility: visible;
-        width: 100vw;
-        height: 60px;
-        padding: 0;
-        background-color: #FF91AF;
-      
-        position: fixed;
-        left: 0px;
-        top: 0px;
-        z-index: 999999999999;
-      `
+          visibility: visible;
+          width: 100vw;
+          height: 60px;
+          padding: 0;
+          background-color: #FF91AF;
+
+          position: fixed;
+          left: 0px;
+          top: 0px;
+          z-index: 999999999999;
+        `
       };
  });
 })()
