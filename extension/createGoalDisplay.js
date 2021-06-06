@@ -4,43 +4,41 @@ function fetch_storage(keys) {
   })
 };
 
+function createElement(type, props = {}, children = []) {
+  let element = document.createElement(type);
+  Object.assign(element, props);
+  children.forEach(child => element.appendChild(child));
+  return element;
+};
+
 (async function() {
   const goal = await fetch_storage(['goal']).then(items => items.goal);
 
-  let goalDisplayBubble = (function() {
-    let goalDisplayBubble = document.createElement("div");
-    goalDisplayBubble.style.cssText = `
-      width: 120px;
-      height: 60px;
-      padding: 0;
-      background-color: #FF91AF;
-      border-radius: 7%;
+  const description = createElement("p", {textContent: goal});
+  description.style = `
+  font-family: sans-serif;
+  font-size: 20px;
+  text-align: center;
 
-      position: fixed;
-      left: 20px;
-      top: 20px;
-      z-index: 999999999999;
-    `
-    return goalDisplayBubble;
-  })()
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+`;
 
-  let goalDescription = (function() {
-    let goalDescription = document.createElement("p");
-    goalDescription.style.cssText = `
-      font-family: sans-serif;
-      font-size: 20px;
-      text-align: center;
+  const box = createElement("div", {}, [description]);
+  box.style = `
+  width: 120px;
+  height: 60px;
+  padding: 0;
+  background-color: #FF91AF;
+  border-radius: 7%;
 
-      position: absolute;
-      left: 50%;
-      top: 50%;
-      transform: translate(-50%, -50%);
-    `
-    goalDescription.textContent = `${goal}`;
-    return goalDescription;
-  })()
+  position: fixed;
+  left: 20px;
+  top: 20px;
+  z-index: 999999999999;
+`
 
-  goalDisplayBubble.appendChild(goalDescription);
-
-  document.body.appendChild(goalDisplayBubble);
+  document.body.appendChild(box);
 })()
