@@ -24,11 +24,15 @@ function removeGoalFromStorage() {
 }
 
 function hideElementToggle(elementId) {
-  return () => document.getElementById(elementId).classList.toggle('u-hide');
+  document.getElementById(elementId).classList.toggle('u-hide');
+}
+
+function createHideElementToggleClosure(elementId) {
+  return () => hideElementToggle(elementId);
 }
 
 function incrementValueInStorage(key) {
-  chrome.storage.local.get(key, () => {
+  chrome.storage.local.get(key, (items) => {
     if (items[key] == null) {
       setDataToStorage({ key: 0 });
     } else {
@@ -45,17 +49,17 @@ const countUpCompletedGoals = createIncrementValueClosure('completedGoalsCount')
 const countUpInteruptedGoals = createIncrementValueClosure('interuptedGoalsCount');
 const countUpDistractions = createIncrementValueClosure('distractionsCount');
 
-submitButton.addEventListener('click', hideElementToggle('form-container'), true);
-submitButton.addEventListener('click', hideElementToggle('buttons-container'), true);
+submitButton.addEventListener('click', createHideElementToggleClosure('form-container'), true);
+submitButton.addEventListener('click', createHideElementToggleClosure('buttons-container'), true);
 submitButton.addEventListener('click', getFormDataAndSetGoalToStorage, true);
 
-completeButton.addEventListener('click', hideElementToggle('form-container'), true);
-completeButton.addEventListener('click', hideElementToggle('buttons-container'), true);
+completeButton.addEventListener('click', createHideElementToggleClosure('form-container'), true);
+completeButton.addEventListener('click', createHideElementToggleClosure('buttons-container'), true);
 completeButton.addEventListener('click', removeGoalFromStorage, true);
 completeButton.addEventListener('click', countUpCompletedGoals, true);
 
-interuptButton.addEventListener('click', hideElementToggle('form-container'), true);
-interuptButton.addEventListener('click', hideElementToggle('buttons-container'), true);
+interuptButton.addEventListener('click', createHideElementToggleClosure('form-container'), true);
+interuptButton.addEventListener('click', createHideElementToggleClosure('buttons-container'), true);
 interuptButton.addEventListener('click', removeGoalFromStorage, true);
 interuptButton.addEventListener('click', countUpInteruptedGoals, true);
 
@@ -63,8 +67,8 @@ distractionButton.addEventListener('click', countUpDistractions, true);
 
 chrome.storage.local.get(['goal'], ({ goal }) => {
   if (goal) {
-    hideElementToggle('form-container')();
+    hideElementToggle('form-container');
   } else {
-    hideElementToggle('buttons-container')();
+    hideElementToggle('buttons-container');
   }
 });
