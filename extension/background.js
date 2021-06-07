@@ -3,11 +3,11 @@ chrome.webNavigation.onCompleted.addListener((details) => {
     if (items.goal) {
       chrome.scripting.executeScript(
         {
-          target: {tabId: details.tabId},
+          target: { tabId: details.tabId },
           files: ['createGoalDisplay.js'],
         },
-        () => {}
+        () => { },
       );
-    };
+    }
   });
 });
