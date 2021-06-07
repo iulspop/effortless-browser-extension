@@ -68,18 +68,20 @@ function openStats() {
 const countUpCompletedGoals = createIncrementValueClosure('completedGoalsCount');
 const countUpInteruptedGoals = createIncrementValueClosure('interuptedGoalsCount');
 const countUpDistractions = createIncrementValueClosure('distractionsCount');
+const toggleHideForm = createHideElementToggleClosure('form-container');
+const toggleHideButtons = createHideElementToggleClosure('buttons-container');
 
-submitButton.addEventListener('click', createHideElementToggleClosure('form-container'), true);
-submitButton.addEventListener('click', createHideElementToggleClosure('buttons-container'), true);
+submitButton.addEventListener('click', toggleHideForm, true);
+submitButton.addEventListener('click', toggleHideButtons, true);
 submitButton.addEventListener('click', getFormDataAndSetGoalToStorage, true);
 
-completeButton.addEventListener('click', createHideElementToggleClosure('form-container'), true);
-completeButton.addEventListener('click', createHideElementToggleClosure('buttons-container'), true);
+completeButton.addEventListener('click', toggleHideForm, true);
+completeButton.addEventListener('click', toggleHideButtons, true);
 completeButton.addEventListener('click', removeGoalFromStorage, true);
 completeButton.addEventListener('click', countUpCompletedGoals, true);
 
-interuptButton.addEventListener('click', createHideElementToggleClosure('form-container'), true);
-interuptButton.addEventListener('click', createHideElementToggleClosure('buttons-container'), true);
+interuptButton.addEventListener('click', toggleHideForm, true);
+interuptButton.addEventListener('click', toggleHideButtons, true);
 interuptButton.addEventListener('click', removeGoalFromStorage, true);
 interuptButton.addEventListener('click', countUpInteruptedGoals, true);
 
