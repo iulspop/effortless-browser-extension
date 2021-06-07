@@ -32,14 +32,18 @@ function createHideElementToggleClosure(elementId) {
   return () => hideElementToggle(elementId);
 }
 
-function incrementValueInStorage(key) {
-  chrome.storage.local.get(key, (items) => {
-    if (items[key] == null) {
-      setDataToStorage({ key: 0 });
-    } else {
-      setDataToStorage({ key: items[key] + 1 });
-    }
+function fetchStorage(keys) {
+  return new Promise((resolve) => {
+    chrome.storage.local.get(keys, (items) => resolve(items));
   });
+}
+
+async function incrementValueInStorage(key) {
+  const items = await fetchStorage([key]);
+  let value;
+  // eslint-disable-next-line no-unused-expressions
+  items[key] == null ? value = 1 : value = items[key] + 1;
+  setDataToStorage({ [key]: value });
 }
 
 function createIncrementValueClosure(key) {
@@ -62,7 +66,7 @@ function openExtensionPage(url) {
 }
 
 function openStats() {
-  openExtensionPage('../pages/stats.html');
+  openExtensionPage('../stats/stats.html');
 }
 
 const countUpCompletedGoals = createIncrementValueClosure('completedGoalsCount');
