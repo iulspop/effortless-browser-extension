@@ -2,6 +2,7 @@ const submitButton = document.getElementById('submit-button');
 const completeButton = document.getElementById('complete-button');
 const interuptButton = document.getElementById('interupt-button');
 const distractionButton = document.getElementById('distraction-button');
+const statsButton = document.getElementById('stats-button');
 const form = document.getElementById('form');
 
 function getFormData(event, name) {
@@ -45,6 +46,25 @@ function createIncrementValueClosure(key) {
   return () => incrementValueInStorage(key);
 }
 
+function openExtensionPage(url) {
+  const fullURL = chrome.runtime.getURL(url);
+
+  function onGot(tabs) {
+    if (tabs.length > 0) {
+      chrome.tabs.update(tabs[0].id, { active: true });
+    } else {
+      chrome.tabs.create({ url: fullURL });
+    }
+    window.close();
+  }
+
+  chrome.tabs.query({ url: fullURL }, onGot);
+}
+
+function openStats() {
+  openExtensionPage('../pages/stats.html');
+}
+
 const countUpCompletedGoals = createIncrementValueClosure('completedGoalsCount');
 const countUpInteruptedGoals = createIncrementValueClosure('interuptedGoalsCount');
 const countUpDistractions = createIncrementValueClosure('distractionsCount');
@@ -64,6 +84,8 @@ interuptButton.addEventListener('click', removeGoalFromStorage, true);
 interuptButton.addEventListener('click', countUpInteruptedGoals, true);
 
 distractionButton.addEventListener('click', countUpDistractions, true);
+
+statsButton.addEventListener('click', openStats);
 
 chrome.storage.local.get(['goal'], ({ goal }) => {
   if (goal) {
