@@ -10,21 +10,32 @@ function setGoalToStorage(event) {
   let goal = formData.get("goal");
 
   chrome.storage.local.set({goal: goal});
-
-  chrome.runtime.sendMessage({goalSet: true});
 };
 
-function showHideElementToggle(elementId) {
+function hideElementToggle(elementId) {
   return () => document.getElementById(elementId).classList.toggle('u-hide');
 }
 
+function removeGoalFromStorage() {
+  chrome.storage.local.remove("goal");
+}
+
+submitButton.addEventListener("click", hideElementToggle("form-container"), true);
+submitButton.addEventListener("click", hideElementToggle("buttons-container"), true);
 submitButton.addEventListener("click", setGoalToStorage, true);
 
-submitButton.addEventListener("click", showHideElementToggle("form-container"), true);
-submitButton.addEventListener("click", showHideElementToggle("buttons-container"), true);
+completeButton.addEventListener("click", hideElementToggle("form-container"), true);
+completeButton.addEventListener("click", hideElementToggle("buttons-container"), true);
+completeButton.addEventListener("click", removeGoalFromStorage, true);
 
-completeButton.addEventListener("click", showHideElementToggle("form-container"), true);
-completeButton.addEventListener("click", showHideElementToggle("buttons-container"), true);
+interuptButton.addEventListener("click", hideElementToggle("form-container"), true);
+interuptButton.addEventListener("click", hideElementToggle("buttons-container"), true);
+interuptButton.addEventListener("click", removeGoalFromStorage, true);
 
-interuptButton.addEventListener("click", showHideElementToggle("form-container"), true);
-interuptButton.addEventListener("click", showHideElementToggle("buttons-container"), true);
+chrome.storage.local.get(['goal'], ({ goal }) => {
+  if (goal) {
+    hideElementToggle("form-container")()
+  } else {
+    hideElementToggle("buttons-container")()
+  }
+})
