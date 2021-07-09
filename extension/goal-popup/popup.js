@@ -40,9 +40,7 @@ function fetchStorage(keys) {
 
 async function incrementValueInStorage(key) {
   const items = await fetchStorage([key]);
-  let value;
-  // eslint-disable-next-line no-unused-expressions
-  items[key] == null ? value = 1 : value = items[key] + 1;
+  let value = items[key] == null ? 1 : items[key] + 1;
   setDataToStorage({ [key]: value });
 }
 
@@ -66,7 +64,7 @@ function openExtensionPage(url) {
 }
 
 function openStats() {
-  openExtensionPage('../stats/stats.html');
+  openExtensionPage('../goal-statistics/statistics.html');
 }
 
 const countUpCompletedGoals = createIncrementValueClosure('completedGoalsCount');

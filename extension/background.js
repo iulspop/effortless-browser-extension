@@ -4,7 +4,7 @@ chrome.webNavigation.onCompleted.addListener((details) => {
       chrome.scripting.executeScript(
         {
           target: { tabId: details.tabId },
-          files: ['createGoalDisplay.js'],
+          files: ['create-goal-display.js'],
         },
         () => { },
       );
