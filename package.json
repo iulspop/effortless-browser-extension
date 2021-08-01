@@ -13,6 +13,7 @@
   },
   "scripts": {
     "test": "jest --watchAll",
+    "open-test-server": "npx serve ./extension/",
     "cy:open": "cypress open"
   },
   "repository": {
