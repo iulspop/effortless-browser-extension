@@ -1,6 +1,5 @@
 describe('My First Test', () => {
   it('try', () => {
-    // cy.visit('https://www.duckduckgo.com');
-    cy.visit('chrome-extension://kfdeejoomejjkcgbjbdgfpbgehdbenob/goal-statistics/statistics.html');
+    cy.visit('http://localhost:5000/goal-popup/popup.html');
   });
 });
