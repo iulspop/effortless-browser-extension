@@ -1,13 +1,8 @@
 chrome.webNavigation.onCompleted.addListener((details) => {
-  chrome.storage.local.get(['goal'], (items) => {
-    if (items.goal) {
-      chrome.scripting.executeScript(
-        {
-          target: { tabId: details.tabId },
-          files: ['create-goal-display.js'],
-        },
-        () => { },
-      );
+  chrome.scripting.executeScript(
+    {
+      target: { tabId: details.tabId },
+      files: ['content-scripts/create-goal-prompt.js'],
     }
-  });
+  );
 });
