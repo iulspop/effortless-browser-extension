@@ -1,16 +1,20 @@
 chrome.webNavigation.onCompleted.addListener(({ tabId }) => {
-  chrome.scripting.insertCSS(
-    {
-      target: { tabId },
-      files: ['content-scripts/create-goal-prompt/create-goal-prompt.css'],
+  chrome.storage.local.get(['goal'], ({ goal }) => {
+    if (!goal) {
+      chrome.scripting.insertCSS(
+        {
+          target: { tabId },
+          files: ['content-scripts/create-goal-prompt/create-goal-prompt.css'],
+        }
+      );
+      chrome.scripting.executeScript(
+        {
+          target: { tabId },
+          files: ['content-scripts/create-goal-prompt/create-goal-prompt.js'],
+        }
+      );
     }
-  );
-  chrome.scripting.executeScript(
-    {
-      target: { tabId },
-      files: ['content-scripts/create-goal-prompt/create-goal-prompt.js'],
-    }
-  );
+  });
 });
 
 chrome.runtime.onMessage.addListener(message => {
