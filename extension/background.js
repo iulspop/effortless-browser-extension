@@ -4,22 +4,25 @@ chrome.runtime.onInstalled.addListener(({ reason }) => {
   }
 });
 
-chrome.webNavigation.onCompleted.addListener(({ tabId }) => {
+chrome.webNavigation.onCompleted.addListener((details) => {
+  if (details.parentFrameId !== 0) { return null }
+
   chrome.storage.local.get(['goal'], ({ goal }) => {
-    if (!goal) {
-      chrome.scripting.insertCSS(
-        {
-          target: { tabId },
-          files: ['content-scripts/create-goal-prompt/create-goal-prompt.css'],
-        }
-      );
-      chrome.scripting.executeScript(
-        {
-          target: { tabId },
-          files: ['content-scripts/create-goal-prompt/create-goal-prompt.js'],
-        }
-      );
-    }
+    if (goal) { return null }
+
+    chrome.scripting.insertCSS(
+      {
+        target: { tabId: details.tabId },
+        files: ['content-scripts/create-goal-prompt/create-goal-prompt.css'],
+      }
+    );
+
+    chrome.scripting.executeScript(
+      {
+        target: { tabId: details.tabId },
+        files: ['content-scripts/create-goal-prompt/create-goal-prompt.js'],
+      }
+    );
   });
 });
 
