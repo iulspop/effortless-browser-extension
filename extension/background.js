@@ -25,7 +25,6 @@ function executeScript(tabId, file) {
   );
 }
 
-
 chrome.runtime.onInstalled.addListener(({ reason }) => {
   if (reason) {
     chrome.storage.local.clear();
@@ -33,7 +32,7 @@ chrome.runtime.onInstalled.addListener(({ reason }) => {
 });
 
 chrome.webNavigation.onCompleted.addListener((details) => {
-  if (details.parentFrameId !== 0) { return null }
+  if (details.frameId !== 0) { return null }
 
   chrome.storage.local.get(['goal'], ({ goal }) => {
     if (goal) { return null }
@@ -50,7 +49,7 @@ chrome.webNavigation.onCompleted.addListener((details) => {
 });
 
 chrome.webNavigation.onCompleted.addListener((details) => {
-  if (details.parentFrameId !== 0) { return null }
+  if (details.frameId !== 0) { return null }
 
   chrome.storage.local.get(['goal'], ({ goal }) => {
     if (!goal) { return null }
