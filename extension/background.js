@@ -49,6 +49,23 @@ chrome.webNavigation.onCompleted.addListener((details) => {
   });
 });
 
+chrome.webNavigation.onCompleted.addListener((details) => {
+  if (details.parentFrameId !== 0) { return null }
+
+  chrome.storage.local.get(['goal'], ({ goal }) => {
+    if (!goal) { return null }
+
+    insertCSS(
+      details.tabId,
+      'content-scripts/create-goal-display/create-goal-display.css'
+    );
+    executeScript(
+      details.tabId,
+      'content-scripts/create-goal-display/create-goal-display.js'
+    );
+  });
+});
+
 chrome.runtime.onMessage.addListener((message, sender) => {
   if ('goal' in message) {
     chrome.storage.local.set(message);
