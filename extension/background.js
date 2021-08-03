@@ -1,3 +1,9 @@
+chrome.runtime.onInstalled.addListener(({ reason }) => {
+  if (reason) {
+    chrome.storage.local.clear();
+  }
+});
+
 chrome.webNavigation.onCompleted.addListener(({ tabId }) => {
   chrome.storage.local.get(['goal'], ({ goal }) => {
     if (!goal) {
