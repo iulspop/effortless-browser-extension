@@ -42,7 +42,6 @@ chrome.webNavigation.onCompleted.addListener((details) => {
       details.tabId,
       'content-scripts/create-goal-prompt/create-goal-prompt.css'
     )
-
     executeScript(
       details.tabId,
       'content-scripts/create-goal-prompt/create-goal-prompt.js'
@@ -71,5 +70,29 @@ chrome.runtime.onMessage.addListener((message, sender) => {
       sender.tab.id,
       'content-scripts/create-goal-display/create-goal-display.js'
     );
+  }
+});
+
+chrome.runtime.onMessage.addListener((message, sender) => {
+  if ('goalUpdate' in message) {
+    chrome.storage.local.remove("goal");
+
+    executeScript(
+      sender.tab.id,
+      'content-scripts/create-goal-display/delete-goal-display.js'
+    );
+    removeCSS(
+      sender.tab.id,
+      'content-scripts/create-goal-display/create-goal-display.css'
+    );
+
+    insertCSS(
+      sender.tab.id,
+      'content-scripts/create-goal-prompt/create-goal-prompt.css'
+    )
+    executeScript(
+      sender.tab.id,
+      'content-scripts/create-goal-prompt/create-goal-prompt.js'
+    )
   }
 });
