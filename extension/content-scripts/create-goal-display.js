@@ -1,4 +1,9 @@
-import createElement from './create-element.js'
+function createElement(type, props = {}, children = []) {
+  const element = document.createElement(type);
+  Object.assign(element, props);
+  children.forEach((child) => element.appendChild(child));
+  return element;
+}
 
 (async function createGoalDisplay() {
   const description = createElement('p', { textContent: "Your goal:" });
