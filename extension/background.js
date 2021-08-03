@@ -18,7 +18,7 @@ chrome.webNavigation.onCompleted.addListener(({ tabId }) => {
 });
 
 chrome.runtime.onMessage.addListener(message => {
-  if (goal in message) {
+  if ('goal' in message) {
     const data = { goal: message.goal };
     chrome.storage.local.set(data);
   }
