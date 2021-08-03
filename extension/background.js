@@ -1,3 +1,31 @@
+function insertCSS(tabId, file) {
+  chrome.scripting.insertCSS(
+    {
+      target: { tabId },
+      files: [file],
+    }
+  );
+}
+
+function removeCSS(tabId, file) {
+  chrome.scripting.removeCSS(
+    {
+      target: { tabId },
+      files: [file],
+    }
+  );
+}
+
+function executeScript(tabId, file) {
+  chrome.scripting.executeScript(
+    {
+      target: { tabId },
+      files: [file],
+    }
+  );
+}
+
+
 chrome.runtime.onInstalled.addListener(({ reason }) => {
   if (reason) {
     chrome.storage.local.clear();
@@ -10,38 +38,30 @@ chrome.webNavigation.onCompleted.addListener((details) => {
   chrome.storage.local.get(['goal'], ({ goal }) => {
     if (goal) { return null }
 
-    chrome.scripting.insertCSS(
-      {
-        target: { tabId: details.tabId },
-        files: ['content-scripts/create-goal-prompt/create-goal-prompt.css'],
-      }
-    );
+    insertCSS(
+      details.tabId,
+      'content-scripts/create-goal-prompt/create-goal-prompt.css'
+    )
 
-    chrome.scripting.executeScript(
-      {
-        target: { tabId: details.tabId },
-        files: ['content-scripts/create-goal-prompt/create-goal-prompt.js'],
-      }
-    );
+    executeScript(
+      details.tabId,
+      'content-scripts/create-goal-prompt/create-goal-prompt.js'
+    )
   });
 });
 
 chrome.runtime.onMessage.addListener((message, sender) => {
   if ('goal' in message) {
-    const data = { goal: message.goal };
-    chrome.storage.local.set(data);
+    chrome.storage.local.set(message);
 
-    chrome.scripting.executeScript(
-      {
-        target: { tabId: sender.tab.id },
-        files: ['content-scripts/create-goal-prompt/delete-goal-prompt.js'],
-      }
+    executeScript(
+      sender.tab.id,
+      'content-scripts/create-goal-prompt/delete-goal-prompt.js'
     );
-    chrome.scripting.removeCSS(
-      {
-        target: { tabId: sender.tab.id },
-        files: ['content-scripts/create-goal-prompt/create-goal-prompt.css'],
-      }
+
+    removeCSS(
+      sender.tab.id,
+      'content-scripts/create-goal-prompt/create-goal-prompt.css'
     );
   }
 });
