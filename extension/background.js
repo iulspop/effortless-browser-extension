@@ -58,10 +58,18 @@ chrome.runtime.onMessage.addListener((message, sender) => {
       sender.tab.id,
       'content-scripts/create-goal-prompt/delete-goal-prompt.js'
     );
-
     removeCSS(
       sender.tab.id,
       'content-scripts/create-goal-prompt/create-goal-prompt.css'
+    );
+
+    insertCSS(
+      sender.tab.id,
+      'content-scripts/create-goal-display/create-goal-display.css'
+    );
+    executeScript(
+      sender.tab.id,
+      'content-scripts/create-goal-display/create-goal-display.js'
     );
   }
 });
