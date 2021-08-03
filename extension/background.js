@@ -26,9 +26,22 @@ chrome.webNavigation.onCompleted.addListener((details) => {
   });
 });
 
-chrome.runtime.onMessage.addListener(message => {
+chrome.runtime.onMessage.addListener((message, sender) => {
   if ('goal' in message) {
     const data = { goal: message.goal };
     chrome.storage.local.set(data);
+
+    chrome.scripting.executeScript(
+      {
+        target: { tabId: sender.tab.id },
+        files: ['content-scripts/create-goal-prompt/delete-goal-prompt.js'],
+      }
+    );
+    chrome.scripting.removeCSS(
+      {
+        target: { tabId: sender.tab.id },
+        files: ['content-scripts/create-goal-prompt/create-goal-prompt.css'],
+      }
+    );
   }
 });
