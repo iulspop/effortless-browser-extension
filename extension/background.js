@@ -12,3 +12,7 @@ chrome.webNavigation.onCompleted.addListener(({ tabId }) => {
     }
   );
 });
+
+chrome.runtime.onMessage.addListener(message => {
+  console.log(message);
+})
