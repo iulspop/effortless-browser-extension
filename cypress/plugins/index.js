@@ -22,7 +22,7 @@ module.exports = (on, config) => {
   on('before:browser:launch', (browser, launchOptions) => {
     // supply the absolute path to an unpacked extension's folder
     // NOTE: extensions cannot be loaded in headless Chrome
-    launchOptions.extensions.push('/home/joy/uber_dev/world_projects/undistractable/extension')
+    launchOptions.extensions.push('/home/joy/uber_dev/world_projects/undistractable/test-build')
 
     return launchOptions
   })

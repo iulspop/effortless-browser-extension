@@ -1,43 +1,43 @@
-function insertCSS(tabId, css) {
+function insertCSS(tabId, css, frameIds) {
   chrome.scripting.insertCSS(
     {
-      target: { tabId },
+      target: { tabId, frameIds },
       css,
     }
   );
 }
 
-function removeCSS(tabId, css) {
+function removeCSS(tabId, css, frameIds) {
   chrome.scripting.removeCSS(
     {
-      target: { tabId },
+      target: { tabId, frameIds },
       css,
     }
   );
 }
 
-function insertCSSFile(tabId, file) {
+function insertCSSFile(tabId, file, frameIds) {
   chrome.scripting.insertCSS(
     {
-      target: { tabId },
+      target: { tabId, frameIds },
       files: [file],
     }
   );
 }
 
-function removeCSSFile(tabId, file) {
+function removeCSSFile(tabId, file, frameIds) {
   chrome.scripting.removeCSS(
     {
-      target: { tabId },
+      target: { tabId, frameIds },
       files: [file],
     }
   );
 }
 
-function executeScript(tabId, file) {
+function executeScript(tabId, file, frameIds) {
   chrome.scripting.executeScript(
     {
-      target: { tabId },
+      target: { tabId, frameIds },
       files: [file],
     }
   );

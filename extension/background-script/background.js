@@ -12,7 +12,7 @@ chrome.webNavigation.onCompleted.addListener((details) => {
   chrome.storage.local.get(['goal'], ({ goal }) => {
     if (goal) { return null }
 
-    injectGoalPrompt(details.tabId);
+    injectGoalPrompt(details.tabId, [details.frameId]);
   });
 });
 
@@ -22,7 +22,7 @@ chrome.webNavigation.onCompleted.addListener((details) => {
   chrome.storage.local.get(['goal'], ({ goal }) => {
     if (!goal) { return null }
 
-    injectGoalDisplay(details.tabId);
+    injectGoalDisplay(details.tabId, [details.frameId]);
   });
 });
 
@@ -30,8 +30,9 @@ chrome.runtime.onMessage.addListener((message, sender) => {
   if ('goal' in message) {
     chrome.storage.local.set(message);
 
-    cleanupGoalPrompt(sender.tab.id);
-    injectGoalDisplay(sender.tab.id);
+    console.log(sender)
+    cleanupGoalPrompt(sender.tab.id, [sender.frameId]);
+    injectGoalDisplay(sender.tab.id, [sender.frameId]);
   }
 });
 
@@ -39,7 +40,7 @@ chrome.runtime.onMessage.addListener((message, sender) => {
   if ('goalUpdate' in message) {
     chrome.storage.local.remove("goal");
 
-    cleanupGoalDisplay(sender.tab.id);
-    injectGoalPrompt(sender.tab.id);
+    cleanupGoalDisplay(sender.tab.id, [sender.frameId]);
+    injectGoalPrompt(sender.tab.id, [sender.frameId]);
   }
 });
