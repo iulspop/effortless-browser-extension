@@ -1,4 +1,4 @@
-import { insertCSS, insertCSSFile, removeCSSFile, executeScript } from './background-script-utils/utils.js'
+import { injectGoalPrompt, cleanupGoalPrompt } from './utils/script-injection.js'
 
 chrome.runtime.onInstalled.addListener(({ reason }) => {
   if (reason) {
@@ -12,22 +12,7 @@ chrome.webNavigation.onCompleted.addListener((details) => {
   chrome.storage.local.get(['goal'], ({ goal }) => {
     if (goal) { return null }
 
-    insertCSS(
-      details.tabId,
-      `@font-face {
-        font-family: "Lato";
-        src: url(${chrome.runtime.getURL('fonts/Lato-Regular.ttf')}) format("truetype"),
-             url(${chrome.runtime.getURL('fonts/Lato-Bold.ttf')}) format("truetype");
-      }`
-    )
-    insertCSSFile(
-      details.tabId,
-      'content-scripts/create-goal-prompt/create-goal-prompt.css'
-    )
-    executeScript(
-      details.tabId,
-      'content-scripts/create-goal-prompt/create-goal-prompt.js'
-    )
+    injectGoalPrompt(details.tabId);
   });
 });
 
@@ -52,14 +37,7 @@ chrome.runtime.onMessage.addListener((message, sender) => {
   if ('goal' in message) {
     chrome.storage.local.set(message);
 
-    executeScript(
-      sender.tab.id,
-      'content-scripts/create-goal-prompt/delete-goal-prompt.js'
-    );
-    removeCSSFile(
-      sender.tab.id,
-      'content-scripts/create-goal-prompt/create-goal-prompt.css'
-    );
+    cleanupGoalPrompt(sender.tab.id)
 
     insertCSSFile(
       sender.tab.id,
@@ -85,21 +63,6 @@ chrome.runtime.onMessage.addListener((message, sender) => {
       'content-scripts/create-goal-display/create-goal-display.css'
     );
 
-    insertCSS(
-      details.tabId,
-      `@font-face {
-        font-family: "Lato";
-        src: url(${chrome.runtime.getURL('fonts/Lato-Regular.ttf')}) format("truetype"),
-             url(${chrome.runtime.getURL('fonts/Lato-Bold.ttf')}) format("truetype");
-      }`
-    )
-    insertCSSFile(
-      sender.tab.id,
-      'content-scripts/create-goal-prompt/create-goal-prompt.css'
-    )
-    executeScript(
-      sender.tab.id,
-      'content-scripts/create-goal-prompt/create-goal-prompt.js'
-    )
+    injectGoalPrompt(sender.tab.id);
   }
 });
