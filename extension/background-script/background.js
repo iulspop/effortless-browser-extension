@@ -1,4 +1,4 @@
-import { injectGoalPrompt, cleanupGoalPrompt } from './utils/script-injection.js'
+import { injectGoalPrompt, cleanupGoalPrompt, injectGoalDisplay, cleanupGoalDisplay } from './utils/script-injection.js'
 
 chrome.runtime.onInstalled.addListener(({ reason }) => {
   if (reason) {
@@ -22,14 +22,7 @@ chrome.webNavigation.onCompleted.addListener((details) => {
   chrome.storage.local.get(['goal'], ({ goal }) => {
     if (!goal) { return null }
 
-    insertCSSFile(
-      details.tabId,
-      'content-scripts/create-goal-display/create-goal-display.css'
-    );
-    executeScript(
-      details.tabId,
-      'content-scripts/create-goal-display/create-goal-display.js'
-    );
+    injectGoalDisplay(details.tabId);
   });
 });
 
@@ -37,16 +30,8 @@ chrome.runtime.onMessage.addListener((message, sender) => {
   if ('goal' in message) {
     chrome.storage.local.set(message);
 
-    cleanupGoalPrompt(sender.tab.id)
-
-    insertCSSFile(
-      sender.tab.id,
-      'content-scripts/create-goal-display/create-goal-display.css'
-    );
-    executeScript(
-      sender.tab.id,
-      'content-scripts/create-goal-display/create-goal-display.js'
-    );
+    cleanupGoalPrompt(sender.tab.id);
+    injectGoalDisplay(sender.tab.id);
   }
 });
 
@@ -54,15 +39,7 @@ chrome.runtime.onMessage.addListener((message, sender) => {
   if ('goalUpdate' in message) {
     chrome.storage.local.remove("goal");
 
-    executeScript(
-      sender.tab.id,
-      'content-scripts/create-goal-display/delete-goal-display.js'
-    );
-    removeCSSFile(
-      sender.tab.id,
-      'content-scripts/create-goal-display/create-goal-display.css'
-    );
-
+    cleanupGoalDisplay(sender.tab.id);
     injectGoalPrompt(sender.tab.id);
   }
 });

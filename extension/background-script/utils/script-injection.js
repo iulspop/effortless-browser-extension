@@ -8,15 +8,15 @@ function injectGoalPrompt(tabId) {
       src: url(${chrome.runtime.getURL('fonts/Lato-Regular.ttf')}) format("truetype"),
            url(${chrome.runtime.getURL('fonts/Lato-Bold.ttf')}) format("truetype");
     }`
-  )
+  );
   insertCSSFile(
     tabId,
     'content-scripts/create-goal-prompt/create-goal-prompt.css'
-  )
+  );
   executeScript(
     tabId,
     'content-scripts/create-goal-prompt/create-goal-prompt.js'
-  )
+  );
 }
 
 function cleanupGoalPrompt(tabId) {
@@ -38,4 +38,26 @@ function cleanupGoalPrompt(tabId) {
   );
 }
 
-export { injectGoalPrompt, cleanupGoalPrompt }
+function injectGoalDisplay(tabId) {
+  insertCSSFile(
+    tabId,
+    'content-scripts/create-goal-display/create-goal-display.css'
+  );
+  executeScript(
+    tabId,
+    'content-scripts/create-goal-display/create-goal-display.js'
+  );
+}
+
+function cleanupGoalDisplay(tabId) {
+  executeScript(
+    tabId,
+    'content-scripts/create-goal-display/delete-goal-display.js'
+  );
+  removeCSSFile(
+    tabId,
+    'content-scripts/create-goal-display/create-goal-display.css'
+  );
+}
+
+export { injectGoalPrompt, cleanupGoalPrompt, injectGoalDisplay, cleanupGoalDisplay }
