@@ -14,6 +14,7 @@ function createEntryPoints(dir) {
     entry[entryName] = { import: importPath, filename: buildPath};
   })
 
+  entry.background.filename = 'background.js';
   return entry
 }
 
