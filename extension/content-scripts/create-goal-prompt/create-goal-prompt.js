@@ -16,7 +16,7 @@ function saveElements(listener, ...elements) {
 }
 
 (function createGoalPrompt() {
-  const label = createElement('label', { for:"goal", textContent: "What do you want to accomplish during your visit?" });
+  const label = createElement('label', { id: "undistractable-extension-label", for:"goal", textContent: "What do you want to accomplish during your visit?" });
   const input = createElement('input', {type:"text", name:"goal", id:"goal", required:"true"});
   const item = createElement('div', {}, [label, input]);
   const button = createElement('button', { textContent: "Start goal-seeking"});

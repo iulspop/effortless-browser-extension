@@ -1,29 +1,4 @@
-function insertCSS(tabId, file) {
-  chrome.scripting.insertCSS(
-    {
-      target: { tabId },
-      files: [file],
-    }
-  );
-}
-
-function removeCSS(tabId, file) {
-  chrome.scripting.removeCSS(
-    {
-      target: { tabId },
-      files: [file],
-    }
-  );
-}
-
-function executeScript(tabId, file) {
-  chrome.scripting.executeScript(
-    {
-      target: { tabId },
-      files: [file],
-    }
-  );
-}
+import { insertCSS, insertCSSFile, removeCSSFile, executeScript } from './background-script-utils/utils.js'
 
 chrome.runtime.onInstalled.addListener(({ reason }) => {
   if (reason) {
@@ -38,6 +13,14 @@ chrome.webNavigation.onCompleted.addListener((details) => {
     if (goal) { return null }
 
     insertCSS(
+      details.tabId,
+      `@font-face {
+        font-family: "Lato";
+        src: url(${chrome.runtime.getURL('fonts/Lato-Regular.ttf')}) format("truetype"),
+             url(${chrome.runtime.getURL('fonts/Lato-Bold.ttf')}) format("truetype");
+      }`
+    )
+    insertCSSFile(
       details.tabId,
       'content-scripts/create-goal-prompt/create-goal-prompt.css'
     )
@@ -54,7 +37,7 @@ chrome.webNavigation.onCompleted.addListener((details) => {
   chrome.storage.local.get(['goal'], ({ goal }) => {
     if (!goal) { return null }
 
-    insertCSS(
+    insertCSSFile(
       details.tabId,
       'content-scripts/create-goal-display/create-goal-display.css'
     );
@@ -73,12 +56,12 @@ chrome.runtime.onMessage.addListener((message, sender) => {
       sender.tab.id,
       'content-scripts/create-goal-prompt/delete-goal-prompt.js'
     );
-    removeCSS(
+    removeCSSFile(
       sender.tab.id,
       'content-scripts/create-goal-prompt/create-goal-prompt.css'
     );
 
-    insertCSS(
+    insertCSSFile(
       sender.tab.id,
       'content-scripts/create-goal-display/create-goal-display.css'
     );
@@ -97,12 +80,20 @@ chrome.runtime.onMessage.addListener((message, sender) => {
       sender.tab.id,
       'content-scripts/create-goal-display/delete-goal-display.js'
     );
-    removeCSS(
+    removeCSSFile(
       sender.tab.id,
       'content-scripts/create-goal-display/create-goal-display.css'
     );
 
     insertCSS(
+      details.tabId,
+      `@font-face {
+        font-family: "Lato";
+        src: url(${chrome.runtime.getURL('fonts/Lato-Regular.ttf')}) format("truetype"),
+             url(${chrome.runtime.getURL('fonts/Lato-Bold.ttf')}) format("truetype");
+      }`
+    )
+    insertCSSFile(
       sender.tab.id,
       'content-scripts/create-goal-prompt/create-goal-prompt.css'
     )
