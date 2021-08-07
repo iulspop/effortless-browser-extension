@@ -2,12 +2,27 @@ html {
   overflow: hidden !important;
 }
 
-#undistactable-extention-bubble {
-  width: 350px;
-  height: 350px;
+#undistractable-extension-background {
+  width: 100vw;
+  height: 100vh;
+  background-image: linear-gradient(to bottom, #f5f3f2, #f2f4f5);
+
+  position: fixed;
+  left: 50vw;
+  top: 50vh;
+  transform: translate(-50%, -50%);
+  z-index: 99998;
+}
+
+#undistactable-extension-bubble {
+  box-sizing: border-box !important;
+
+  width: 450px;
+  height: 520px;
   padding: 50px;
-  background-color: #FF91AF;
-  border-radius: 50%;
+  background-color: white;
+  border-radius: 5%;
+  box-shadow: 0 1px 6px 0 rgba(0, 0, 0, 6%), 0 2px 32px 0 rgba(0, 0, 0, 6%);
 
   position: fixed;
   left: 50vw;
@@ -23,19 +38,86 @@ html {
   text-align: center;
 }
 
-#undistractable-extension-background {
-  width: 100vw;
-  height: 100vh;
-  background-color: #A9A9A9;
+#undistactable-extension-form {
+  height: 100%;
 
-  position: fixed;
-  left: 50vw;
-  top: 50vh;
-  transform: translate(-50%, -50%);
-  z-index: 99998;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
 }
 
 #undistractable-extension-label {
-  font-family: "Lato", sans-serif !important;
-  font-size: 24px !important;
+  font-family: "Lato", sans-serif;
+  font-weight: 700;
+  font-size: 24px;
+
+  display: block;
+}
+
+#undistractable-extension-input {
+  font-family: "Lato", sans-serif;
+  font-size: 16px;
+  padding: 1.5rem 2rem;
+  border-radius: 2px;
+  background-color: rbga(white, .5);
+  border: none;
+  border-bottom: 3px solid transparent;
+
+  /* width: 90%; */
+  display: block;
+  /* transition: all .3s; */
+}
+
+#undistractable-extension-input:focus {
+  outline: none;
+  box-shadow: 0 1rem 2rem rgba(black, .1);
+  border-bottom: 3px solid greenyellow;
+}
+
+#undistractable-extension-input:invalid {
+  border-bottom: 3px solid red;
+}
+
+#undistractable-extension-button {
+  text-transform: uppercase;
+  text-decoration: none;
+  padding: 1.5rem 4rem;
+  display: inline-block;
+  border-radius: 10rem;
+  transition: all .2s;
+  position: relative;
+  font-size: 16px;
+
+  border: none;
+  cursor: pointer;
+}
+
+#undistractable-extension-button::after {
+  content: "";
+  display: inline-block;
+  height: 100%;
+  width: 100%;
+  border-radius: 10rem;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: -1;
+  transition: all .4s;
+}
+
+#undistractable-extension-button:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 1rem 2rem rgba(black,.2);
+}
+
+#undistractable-extension-button:active,
+#undistractable-extension-button:focus {
+  outline: none;
+  transform: translateY(-1px);
+  box-shadow: 0 .5rem 1rem rgba(black,.2);
+}
+
+#undistractable-extension-button:hover::after {
+  transform: scaleX(1.4) scaleY(1.6);
+  opacity: 0;
 }

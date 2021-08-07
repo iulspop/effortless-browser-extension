@@ -16,17 +16,16 @@ function saveElements(listener, ...elements) {
 }
 
 (function createGoalPrompt() {
-  const label = createElement('label', { id: "undistractable-extension-label", for:"goal", textContent: "What do you want to accomplish during your visit?" });
-  const input = createElement('input', {type:"text", name:"goal", id:"goal", required:"true"});
-  const item = createElement('div', {}, [label, input]);
-  const button = createElement('button', { textContent: "Start goal-seeking"});
-
-  const form = createElement('form', {}, [item, button]);
+  const label = createElement('label', { id: "undistractable-extension-label", for:"undistractable-extension-input", textContent: "What will you accomplish during your visit?" });
+  const input = createElement('input', { id: "undistractable-extension-input", type:"text", name:"goal"});
+  const button = createElement('button', { id: "undistractable-extension-button", textContent: "Start"});
+  
+  const form = createElement('form', {id: "undistactable-extension-form"}, [label, input, button]);
 
   const getFormDataAndSendMessageClosure = saveElements(getFormDataAndSendMessage, form);
   button.addEventListener('click', getFormDataAndSendMessageClosure, true);
 
-  const bubble = createElement('div', {id: "undistactable-extention-bubble"}, [form]);
+  const bubble = createElement('div', {id: "undistactable-extension-bubble"}, [form]);
   const background = createElement('div', {id: "undistractable-extension-background"});
 
   document.body.appendChild(background);

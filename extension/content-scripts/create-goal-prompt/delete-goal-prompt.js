@@ -1,5 +1,5 @@
 (function deleteGoalPrompt() {
-  const bubble = document.getElementById("undistactable-extention-bubble");
+  const bubble = document.getElementById("undistactable-extension-bubble");
   const background = document.getElementById("undistractable-extension-background");
 
   bubble.remove();
