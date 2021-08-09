@@ -32,6 +32,7 @@ function createSendMessageClosure(data) {
   const buttons = createElement('div', {}, [buttonsDescription, completeButton, interuptButton])
 
   const goalDisplay = createElement('div', { id: "undistractable-extension-goal-display" }, [description, buttons]);
+  goalDisplay.setAttribute("data-cy", "goal-display");
 
   document.body.appendChild(goalDisplay);
 })();

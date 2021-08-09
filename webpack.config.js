@@ -11,6 +11,7 @@ config = {
     filename: "[name].js",
     path: path.resolve(__dirname, 'dev-build')
   },
+  optimization: { minimize: false },
   plugins: [
     new CopyPlugin({
       patterns: [
@@ -27,7 +28,6 @@ config = {
 
 if (isTest) {
   config.output.path = path.resolve(__dirname, 'test-build')
-  config.optimization = { minimize: false }
   config.module = {
     rules: [
       {
@@ -35,7 +35,7 @@ if (isTest) {
         loader: 'string-replace-loader',
         options: {
           search: 'details.frameId !== 0',
-          replace: 'details.url !== "https://duckduckgo.com/?q=turtle&ia=web"',
+          replace: '\/(cypress|integration|about:blank)\/.test(details.url)',
           flags: 'g',
           strict: true
         }
