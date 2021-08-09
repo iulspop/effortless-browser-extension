@@ -30,7 +30,6 @@ chrome.runtime.onMessage.addListener((message, sender) => {
   if ('goal' in message) {
     chrome.storage.local.set(message);
 
-    console.log(sender)
     cleanupGoalPrompt(sender.tab.id, [sender.frameId]);
     injectGoalDisplay(sender.tab.id, [sender.frameId]);
   }
