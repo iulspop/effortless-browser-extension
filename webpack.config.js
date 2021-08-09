@@ -1,47 +1,74 @@
 const path = require('path');
 const createEntryPoints = require('./createEntryPoints');
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const CopyPlugin = require("copy-webpack-plugin");
+const exec = require('child_process').exec;
 
 const isTest = process.argv.includes('testing');
 
 config = {
   mode: "production",
+  optimization: { minimize: false },
   entry: createEntryPoints('./extension'),
   output: {
-    filename: "[name].js",
     path: path.resolve(__dirname, 'dev-build')
   },
-  optimization: { minimize: false },
+  module: {
+    rules: [
+      {
+        test: /\.scss$/i,
+        use: [
+          MiniCssExtractPlugin.loader,
+          'css-loader',
+          {
+            loader: 'sass-loader',
+            options: {
+              sassOptions: {
+                  outputStyle: 'expanded'
+              }
+            }
+          },
+        ],
+      }
+    ],
+  },
   plugins: [
+    new MiniCssExtractPlugin(),
     new CopyPlugin({
       patterns: [
         {
           from: "./extension",
           globOptions: {
-            ignore: ["**/*.js"]
+            ignore: ["**/*.js", "**/*.scss"]
           }
         }
       ]
-    })
-  ],
+    }),
+    {
+      apply: (compiler) => {
+        compiler.hooks.afterEmit.tap('AfterEmitPlugin', (compilation) => {
+          exec('rm ./*-build/*-to-delete', (err, stdout, stderr) => {
+            if (stdout) process.stdout.write(stdout);
+            if (stderr) process.stderr.write(stderr);
+          });
+        });
+      }
+    }
+  ]
 };
 
 if (isTest) {
   config.output.path = path.resolve(__dirname, 'test-build')
-  config.module = {
-    rules: [
-      {
-        test: /background\.js$/,
-        loader: 'string-replace-loader',
-        options: {
-          search: 'details.frameId !== 0',
-          replace: '\/(cypress|integration|about:blank)\/.test(details.url)',
-          flags: 'g',
-          strict: true
-        }
-      }
-    ]
-  }
+  config.module.rules.push({
+    test: /background\.js$/,
+    loader: 'string-replace-loader',
+    options: {
+      search: 'details.frameId !== 0',
+      replace: '\/(cypress|integration|test|about:blank)\/.test(details.url)',
+      flags: 'g',
+      strict: true
+    }
+  })
 }
 
 module.exports = config
