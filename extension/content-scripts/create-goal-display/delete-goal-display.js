@@ -1,4 +1,4 @@
 (function deleteGoalDisplay() {
-  const bubble = document.getElementById("undistractable-extension-goal-display");
+  const bubble = document.getElementById("undistractable-extension");
   bubble.remove();
 })();
