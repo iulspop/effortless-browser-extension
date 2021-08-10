@@ -45,6 +45,15 @@ function cleanupGoalPrompt(tabId, frameIds) {
 }
 
 function injectGoalDisplay(tabId, frameIds) {
+  insertCSS(
+    tabId,
+    `@font-face {
+      font-family: "Lato";
+      src: url(${chrome.runtime.getURL('fonts/Lato-Regular.ttf')}) format("truetype"),
+           url(${chrome.runtime.getURL('fonts/Lato-Bold.ttf')}) format("truetype");
+    }`,
+    frameIds
+  );
   insertCSSFile(
     tabId,
     'content-scripts/create-goal-display/create-goal-display.css',
@@ -66,6 +75,15 @@ function cleanupGoalDisplay(tabId, frameIds) {
   removeCSSFile(
     tabId,
     'content-scripts/create-goal-display/create-goal-display.css',
+    frameIds
+  );
+  removeCSS(
+    tabId,
+    `@font-face {
+      font-family: "Lato";
+      src: url(${chrome.runtime.getURL('fonts/Lato-Regular.ttf')}) format("truetype"),
+           url(${chrome.runtime.getURL('fonts/Lato-Bold.ttf')}) format("truetype");
+    }`,
     frameIds
   );
 }
