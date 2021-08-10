@@ -21,15 +21,13 @@ function createSendMessageClosure(data) {
 
   const description = createElement('p', { className: "display__description", textContent: goal });
 
-  const buttonsDescription = createElement('p', { textContent: "Mark goal:" })
-
   const completeButton = createElement('button', { className: "display__button", textContent: "Complete" })
   completeButton.addEventListener('click', sendCompleted, true);
 
   const interuptButton = createElement('button', { className: "display__button", textContent: "Interrupted" })
   interuptButton.addEventListener('click', sendInterrupted, true);
 
-  const buttons = createElement('div', {}, [buttonsDescription, completeButton, interuptButton])
+  const buttons = createElement('div', {}, [completeButton, interuptButton])
 
   const goalDisplay = createElement('div', { className: "display" }, [description, buttons]);
   goalDisplay.setAttribute("data-cy", "goal-display");
