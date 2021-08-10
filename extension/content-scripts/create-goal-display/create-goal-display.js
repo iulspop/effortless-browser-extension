@@ -15,24 +15,25 @@ function createSendMessageClosure(data) {
 }
 
 (async function setupGoalDisplay() {
+  const sendCompleted = createSendMessageClosure({goalUpdate: "completed"})
+  const sendInterrupted = createSendMessageClosure({goalUpdate: "interrupted"})
   const goal = await fetchStorage(['goal']).then((items) => items.goal);
 
-  const description = createElement('p', { id: "undistractable-extension-goal-description", textContent: goal });
+  const description = createElement('p', { className: "display__description", textContent: goal });
 
-  const buttonsDescription = createElement('p', {textContent: "Mark goal:"})
+  const buttonsDescription = createElement('p', { textContent: "Mark goal:" })
 
-  const completeButton = createElement('button', { id: "indistractable-extension-complete-button", textContent: "Complete"})
-  const sendCompleted = createSendMessageClosure({goalUpdate: "completed"})
+  const completeButton = createElement('button', { className: "display__button", textContent: "Complete" })
   completeButton.addEventListener('click', sendCompleted, true);
 
-  const interuptButton = createElement('button', { id: "indistractable-extension-interupt-button", textContent: "Interrupted"})
-  const sendInterrupted = createSendMessageClosure({goalUpdate: "interrupted"})
+  const interuptButton = createElement('button', { className: "display__button", textContent: "Interrupted" })
   interuptButton.addEventListener('click', sendInterrupted, true);
 
   const buttons = createElement('div', {}, [buttonsDescription, completeButton, interuptButton])
 
-  const goalDisplay = createElement('div', { id: "undistractable-extension-goal-display" }, [description, buttons]);
+  const goalDisplay = createElement('div', { className: "display" }, [description, buttons]);
   goalDisplay.setAttribute("data-cy", "goal-display");
 
-  document.body.appendChild(goalDisplay);
+  const extensionWrapper = createElement('div', { id: "undistractable-extension" }, [goalDisplay])
+  document.body.appendChild(extensionWrapper);
 })();
