@@ -1,5 +1,4 @@
 #undistractable-extension {
-
   & .display {
     box-sizing: border-box !important;
     width: 100vw;
@@ -11,7 +10,7 @@
     position: fixed;
     left: 0px;
     top: 0px;
-    z-index: 999999999999;
+    z-index: 99999999999;
 
     display: flex;
     flex-direction: row;
@@ -22,6 +21,10 @@
     font-size: 14px !important;
     line-height: 1.6;
     overflow-wrap: normal;
+
+    animation-name: moveInRight;
+    animation-duration: .4s;
+    animation-timing-function: ease-out;
 
     &__description {
       line-height: 1;
@@ -43,5 +46,51 @@
       border: 1px solid rgb(214, 214, 214);
       background-color: white;
     }
+
+    &__retract-button {
+      font-family: Lato, sans-serif;
+      font-size: 14px !important;
+      line-height: 10px !important;
+
+      width: 40px;
+      height: 40px;
+      border: 0px;
+
+      position: absolute;
+      right: 0px;
+
+      &:hover {
+        cursor: pointer;
+        background-color: lightgrey;
+      }
+    }
+
+    &--retracted {
+      animation-name: moveOutLeft;
+      animation-duration: .4s;
+      animation-timing-function: ease-out;
+
+      transform: translateX(-95%);
+    }
+  }
+}
+
+@keyframes moveOutLeft {
+  0% {
+    transform: translateX(0);
+  }
+
+  100% {
+    transform: translateX(-95%);
+  }
+}
+
+@keyframes moveInRight {
+  0% {
+    transform: translateX(-95%);
+  }
+
+  100% {
+    transform: translateX(0);
   }
 }

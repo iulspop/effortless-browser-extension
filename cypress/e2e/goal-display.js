@@ -25,5 +25,15 @@ describe('Goal Prompt Display', () => {
       cy.get('[data-cy=goal-display]').should('not.exist')
       cy.get('[data-cy=goal-prompt-popup]').should('be.visible')
     });
+
+    it('user clicks retract button to rectract the display to the left', () => {
+      cy.get('[data-cy=retract-button]').click()
+
+      cy.get('[data-cy=goal-display]').should('have.class', 'display--retracted')
+
+      cy.get('[data-cy=retract-button]').click()
+
+      cy.get('[data-cy=goal-display]').should('not.have.class', 'display--retracted')
+    });
   });
 });

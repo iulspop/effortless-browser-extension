@@ -14,6 +14,18 @@ function createSendMessageClosure(data) {
   return () => sendMessage(data);
 }
 
+function toggleClass(node, klass) {
+  node.classList.toggle(klass)
+}
+
+function createToggleClassClosure(node, klass) {
+  return () => toggleClass(node, klass)
+}
+
+function createAlternateSignClosure(node) {
+  return () => { node.textContent === "<<" ? node.textContent = ">>" : node.textContent = "<<" }
+}
+
 (async function setupGoalDisplay() {
   const sendCompleted = createSendMessageClosure({goalUpdate: "completed"})
   const sendInterrupted = createSendMessageClosure({goalUpdate: "interrupted"})
@@ -31,8 +43,14 @@ function createSendMessageClosure(data) {
 
   const buttons = createElement('div', {}, [completeButton, interuptButton])
 
-  const goalDisplay = createElement('div', { className: "display" }, [description, buttons]);
+  const retractButton = createElement('button', { className: "display__retract-button", textContent: "<<" })
+  retractButton.setAttribute("data-cy", "retract-button");
+  retractButton.addEventListener('click', createAlternateSignClosure(retractButton), true)
+
+  const goalDisplay = createElement('div', { className: "display" }, [description, buttons, retractButton]);
   goalDisplay.setAttribute("data-cy", "goal-display");
+
+  retractButton.addEventListener('click', createToggleClassClosure(goalDisplay, "display--retracted"), true)
 
   const extensionWrapper = createElement('div', { id: "undistractable-extension" }, [goalDisplay])
   document.body.appendChild(extensionWrapper);
