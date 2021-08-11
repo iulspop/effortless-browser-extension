@@ -1,7 +1,9 @@
 #undistractable-extension {
+
   & .display {
+    box-sizing: border-box !important;
     width: 100vw;
-    height: 30px;
+    height: 40px;
     padding: 5px 0 5px 0;
     background-color: white;
     box-shadow: 0 1px 6px 0 rgba(0, 0, 0, 6%), 0 2px 32px 0 rgba(0, 0, 0, 6%);
@@ -17,6 +19,9 @@
     align-items: center;
 
     font-family: Lato, sans-serif;
+    font-size: 14px !important;
+    line-height: 1.6;
+    overflow-wrap: normal;
 
     &__description {
       line-height: 1;
@@ -26,9 +31,15 @@
     }
 
     &__button {
+      font-family: Lato, sans-serif;
+      font-size: 14px !important;
+      line-height: 10px !important;
+
+      width: 90px;
+      height: 27px;
       margin-left: 20px;
       margin-right: 20px;
-      padding: 5px;
+      padding: 8px;
       border: 1px solid rgb(214, 214, 214);
       background-color: white;
     }
