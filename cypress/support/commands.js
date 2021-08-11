@@ -23,3 +23,10 @@
 //
 // -- This will overwrite an existing command --
 // Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
+
+Cypress.Commands.add('resetExtensionState', () => {
+  // The extension id in development
+  // It remains constant because it is derived from the key in the manifest.json
+  const extensionId = "nabnniifflcoipfbbpaagkdnongdnkmb"
+  // chrome.runtime.sendMessage(extensionId, { resetState: true })
+})

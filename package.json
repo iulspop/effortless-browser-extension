@@ -7,11 +7,11 @@
     "copy-webpack-plugin": "^9.0.1",
     "css-loader": "^6.2.0",
     "cypress": "^8.1.0",
+    "http-server": "^13.0.0",
     "mini-css-extract-plugin": "^2.2.0",
     "npm-run-all": "^4.1.5",
     "sass": "^1.37.5",
     "sass-loader": "^12.1.0",
-    "serve": "^12.0.0",
     "start-server-and-test": "^1.13.1",
     "string-replace-loader": "^3.0.3",
     "webpack": "^5.49.0",
@@ -23,9 +23,9 @@
     "dev:build": "webpack --watch",
     "cy:open": "cypress open",
     "test:build": "webpack --watch --env testing",
-    "test:serve": "serve cypress/fixtures",
+    "test:serve": "npx http-server ./cypress/fixtures/ -S -K ./cypress/fixtures/ssl/key.pem -C ./cypress/fixtures/ssl/cert.pem",
     "test:setup": "npm-run-all --parallel test:build test:serve",
-    "test:e2e": "start-server-and-test test:setup 5000 cy:open"
+    "test:e2e": "start-server-and-test test:setup https://localhost:8080 cy:open"
   },
   "repository": {
     "type": "git",

@@ -7,7 +7,7 @@ describe('Goal Prompt Popup', () => {
     user.get('[data-cy=goal-prompt-popup]').should('be.visible')
 
     // the user enters their goal
-    user.get('[data-cy=goal-input]').type('Read Cypress docs so I write my tests')
+    user.get('[data-cy=goal-input]').type('Learn just enough from Cypress docs so I can write my tests')
 
     // the user submits their goal
     user.get('[data-cy=start-button]').click()

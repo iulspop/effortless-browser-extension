@@ -43,3 +43,9 @@ chrome.runtime.onMessage.addListener((message, sender) => {
     injectGoalPrompt(sender.tab.id, [sender.frameId]);
   }
 });
+
+chrome.runtime.onMessageExternal.addListener((message) => {
+  if (message.resetState === true) {
+    chrome.storage.local.clear();
+  }
+});
