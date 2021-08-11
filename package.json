@@ -23,9 +23,10 @@
     "dev:build": "webpack --watch",
     "cy:open": "cypress open",
     "test:build": "webpack --watch --env testing",
-    "test:serve": "npx http-server ./cypress/fixtures/ -S -K ./cypress/fixtures/ssl/key.pem -C ./cypress/fixtures/ssl/cert.pem",
+    "test:serve-secure": "npx http-server ./cypress/fixtures/ -S -K ./cypress/fixtures/ssl/key.pem -C ./cypress/fixtures/ssl/cert.pem",
+    "test:serve": "npx http-server ./cypress/fixtures/",
     "test:setup": "npm-run-all --parallel test:build test:serve",
-    "test:e2e": "start-server-and-test test:setup https://localhost:8080 cy:open"
+    "test:e2e": "start-server-and-test test:setup 8080 cy:open"
   },
   "repository": {
     "type": "git",
