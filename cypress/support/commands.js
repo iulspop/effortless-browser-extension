@@ -14,3 +14,7 @@ Cypress.Commands.add('sendMessage', (message) => {
 Cypress.Commands.add('resetExtensionState', () => {
   cy.sendMessage({ resetState: true })
 })
+
+Cypress.Commands.add('setExtensionState', (newState) => {
+  cy.sendMessage({ setState: true, newState })
+})

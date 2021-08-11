@@ -54,4 +54,9 @@ chrome.runtime.onMessageExternal.addListener((message, sender, sendResponse) => 
     chrome.storage.local.clear();
     sendResponse({message: "Reset the storage. Yay!"});
   }
+
+  if (message.setState === true) {
+    chrome.storage.local.set(message.newState);
+    sendResponse({message: "Set the new state. Yay!"});
+  }
 });

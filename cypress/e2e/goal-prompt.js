@@ -1,21 +1,17 @@
 describe('Goal Prompt Popup', () => {
-  it('When a goal is not set, and the user visits a page', () => {
-    const user = cy;
-    user.visit('/google');
+  context('A goal is not set and the user visits a page', () => {
+    beforeEach(() => {
+      cy.visit('/google');
+    })
 
-    // the goal prompt should pop up
-    user.get('[data-cy=goal-prompt-popup]').should('be.visible')
+    it('user sees the goal prompt pop up and enters their goal, the prompt disappear and the goal display appears', () => {
+      cy.get('[data-cy=goal-prompt-popup]').should('be.visible')
 
-    // the user enters their goal
-    user.get('[data-cy=goal-input]').type('Learn just enough from Cypress docs so I can write my tests')
+      cy.get('[data-cy=goal-input]').type('Learn just enough from Cypress docs so I can write my tests')
+      cy.get('[data-cy=start-button]').click()
 
-    // the user submits their goal
-    user.get('[data-cy=start-button]').click()
-
-    // when a user submits their goal, the goal prompt should be deleted
-    user.get('[data-cy=goal-prompt-popup]').should('not.exist')
-
-    // when a user submits their goal, a display showing their goal should be visible
-    user.get('[data-cy=goal-display]').should('be.visible')
-  });
+      cy.get('[data-cy=goal-prompt-popup]').should('not.exist')
+      cy.get('[data-cy=goal-display]').should('be.visible')
+    });
+  })
 })

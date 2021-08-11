@@ -22,10 +22,12 @@ function createSendMessageClosure(data) {
   const description = createElement('p', { className: "display__description", textContent: goal });
 
   const completeButton = createElement('button', { className: "display__button", textContent: "Complete" })
+  completeButton.setAttribute("data-cy", "complete-button");
   completeButton.addEventListener('click', sendCompleted, true);
 
   const interuptButton = createElement('button', { className: "display__button", textContent: "Interrupted" })
   interuptButton.addEventListener('click', sendInterrupted, true);
+  interuptButton.setAttribute("data-cy", "interupt-button");
 
   const buttons = createElement('div', {}, [completeButton, interuptButton])
 
