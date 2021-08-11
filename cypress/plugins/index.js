@@ -22,6 +22,7 @@ module.exports = (on, config) => {
   on('before:browser:launch', (browser, launchOptions) => {
     // supply the absolute path to an unpacked extension's folder
     // NOTE: extensions cannot be loaded in headless Chrome
+    launchOptions.extensions.push('/home/joy/uber_dev/world_projects/indistractable/cypress/plugins/message-relay-extension')
     launchOptions.extensions.push('/home/joy/uber_dev/world_projects/indistractable/test-build')
 
     return launchOptions

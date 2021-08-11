@@ -1,32 +1,16 @@
-// ***********************************************
-// This example commands.js shows you how to
-// create various custom commands and overwrite
-// existing commands.
-//
-// For more comprehensive examples of custom
-// commands please read more here:
-// https://on.cypress.io/custom-commands
-// ***********************************************
-//
-//
-// -- This is a parent command --
-// Cypress.Commands.add('login', (email, password) => { ... })
-//
-//
-// -- This is a child command --
-// Cypress.Commands.add('drag', { prevSubject: 'element'}, (subject, options) => { ... })
-//
-//
-// -- This is a dual command --
-// Cypress.Commands.add('dismiss', { prevSubject: 'optional'}, (subject, options) => { ... })
-//
-//
-// -- This will overwrite an existing command --
-// Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
-
-Cypress.Commands.add('resetExtensionState', () => {
+Cypress.Commands.add('sendMessage', (message) => {
   // The extension id in development
   // It remains constant because it is derived from the key in the manifest.json
-  const extensionId = "nabnniifflcoipfbbpaagkdnongdnkmb"
-  // chrome.runtime.sendMessage(extensionId, { resetState: true })
+  let extensionId = "nabnniifflcoipfbbpaagkdnongdnkmb";
+
+  function dispatchMessageEvent(extensionId, message) {
+    let triggerMessage = new CustomEvent("messageToRelay", {detail: {extensionId, message}});
+    window.document.dispatchEvent(triggerMessage);
+  }
+
+  dispatchMessageEvent(extensionId, message)
+})
+
+Cypress.Commands.add('resetExtensionState', () => {
+  cy.sendMessage({ resetState: true })
 })

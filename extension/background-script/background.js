@@ -44,8 +44,14 @@ chrome.runtime.onMessage.addListener((message, sender) => {
   }
 });
 
-chrome.runtime.onMessageExternal.addListener((message) => {
+chrome.runtime.onMessageExternal.addListener((message, sender, sendResponse) => {
+  console.log('Received message:');
+  console.log(message);
+  console.log('From the sender:');
+  console.log(sender);
+
   if (message.resetState === true) {
     chrome.storage.local.clear();
+    sendResponse({message: "Reset the storage. Yay!"});
   }
 });

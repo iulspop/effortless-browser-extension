@@ -14,8 +14,5 @@
       "matches": [ "<all_urls>" ]
     }
   ],
-  "externally_connectable": {
-    "matches": ["https://localhost:8080/"]
-  },
   "key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAmdYdPzy418yqjV774J3Im9H7zUVhRNB3lSIAJlL60PRdASo+0fAoC+BuGQbKXwAF6/sg3LnVGPmmBy0Z+tXfgxizoEhJAv7FwCmkmdzP5KUtC/AS8e2OpKwaEkbJU87UcfvkCPDLaw3rGk1uxlBOS8lICFDSDU19B3iLBFlYwZvU61fTacddhz/dqCb0XNhHGtJSOPpXaBmCWak9pjkkjOiK0x188SH1tXjMldVTnxYGAKzQQpSZGY6PE7o/G52RlqwpDRiBBgGRj4ICXebdH+p243uzk43G+ZP73U/TFgB1b2Wb5WyQ0tPkpkjRs9cpzfdiJaAxAs+m0pxL8BFTfQIDAQAB"
 }
