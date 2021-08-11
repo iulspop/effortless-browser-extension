@@ -6,7 +6,7 @@ chrome.runtime.onInstalled.addListener(({ reason }) => {
   }
 });
 
-chrome.webNavigation.onCompleted.addListener((details) => {
+chrome.webNavigation.onCommitted.addListener((details) => {
   if (details.frameId !== 0) { return null }
 
   chrome.storage.local.get(['goal'], ({ goal }) => {
@@ -16,7 +16,7 @@ chrome.webNavigation.onCompleted.addListener((details) => {
   });
 });
 
-chrome.webNavigation.onCompleted.addListener((details) => {
+chrome.webNavigation.onCommitted.addListener((details) => {
   if (details.frameId !== 0) { return null }
 
   chrome.storage.local.get(['goal'], ({ goal }) => {
