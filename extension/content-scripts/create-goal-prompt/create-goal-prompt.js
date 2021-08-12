@@ -33,4 +33,6 @@ function saveElements(listener, ...elements) {
 
   document.body.appendChild(background);
   document.body.appendChild(bubble);
+
+  input.focus();
 })();
