@@ -27,8 +27,8 @@ chrome.webNavigation.onCommitted.addListener((details) => {
 });
 
 chrome.runtime.onMessage.addListener((message, sender) => {
-  if ('goal' in message) {
-    chrome.storage.local.set(message);
+  if ('goalSet' in message) {
+    chrome.storage.local.set({ goal: message.goalSet });
 
     cleanupGoalPrompt(sender.tab.id, [sender.frameId]);
     injectGoalDisplay(sender.tab.id, [sender.frameId]);
@@ -36,7 +36,7 @@ chrome.runtime.onMessage.addListener((message, sender) => {
 });
 
 chrome.runtime.onMessage.addListener((message, sender) => {
-  if ('goalUpdate' in message) {
+  if ('goalStatus' in message) {
     chrome.storage.local.remove("goal");
 
     cleanupGoalDisplay(sender.tab.id, [sender.frameId]);

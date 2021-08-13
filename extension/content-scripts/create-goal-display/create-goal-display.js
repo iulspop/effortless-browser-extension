@@ -27,8 +27,8 @@ function createAlternateSignClosure(node) {
 }
 
 (async function setupGoalDisplay() {
-  const sendCompleted = createSendMessageClosure({goalUpdate: "completed"})
-  const sendInterrupted = createSendMessageClosure({goalUpdate: "interrupted"})
+  const sendCompleted = createSendMessageClosure({goalStatus: "completed"})
+  const sendInterrupted = createSendMessageClosure({goalStatus: "interrupted"})
   const goal = await fetchStorage(['goal']).then((items) => items.goal);
 
   const description = createElement('p', { className: "display__description", textContent: goal });
