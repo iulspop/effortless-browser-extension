@@ -1,7 +1,7 @@
 import { injectGoalPrompt, cleanupGoalPrompt, injectGoalDisplay, cleanupGoalDisplay } from './utils/script-injection.js'
 
 chrome.runtime.onInstalled.addListener(({ reason }) => {
-  if (reason) {
+  if (reason === "install") {
     chrome.storage.local.clear();
   }
 });
