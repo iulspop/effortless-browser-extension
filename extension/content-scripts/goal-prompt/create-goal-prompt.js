@@ -15,7 +15,7 @@ function saveElements(listener, ...elements) {
   return event => listener(event, ...elements);
 }
 
-(function createGoalPrompt() {
+export function createGoalPrompt() {
   const label = createElement('label', { id: "undistractable-extension-label", for:"undistractable-extension-input", textContent: "What outcome do you seek?" });
   const input = createElement('input', { id: "undistractable-extension-input", type:"text", name:"goal"});
   input.setAttribute("data-cy", "goal-input");
@@ -35,4 +35,6 @@ function saveElements(listener, ...elements) {
   document.body.appendChild(bubble);
 
   input.focus();
-})();
+}
+
+createGoalPrompt()

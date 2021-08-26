@@ -26,7 +26,7 @@ function createAlternateSignClosure(node) {
   return () => { node.textContent === "<<" ? node.textContent = ">>" : node.textContent = "<<" }
 }
 
-(async function setupGoalDisplay() {
+export async function createGoalDisplay() {
   const sendCompleted = createSendMessageClosure({goalStatus: "completed"})
   const sendInterrupted = createSendMessageClosure({goalStatus: "interrupted"})
   const goal = await fetchStorage(['goal']).then((items) => items.goal);
@@ -54,4 +54,6 @@ function createAlternateSignClosure(node) {
 
   const extensionWrapper = createElement('div', { id: "undistractable-extension" }, [goalDisplay])
   document.body.appendChild(extensionWrapper);
-})();
+}
+
+createGoalDisplay()
