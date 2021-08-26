@@ -1,5 +1,5 @@
-import { goalPrompt } from './goal-prompt/goal-prompt.js'
-import { goalDisplay } from './goal-display/goal-display.js'
+// import { goalPrompt } from './goal-prompt/goal-prompt.js'
+// import { goalDisplay } from './goal-display/goal-display.js'
 
 console.log("Controller Loaded.")
 

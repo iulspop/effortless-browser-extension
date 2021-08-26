@@ -15,13 +15,27 @@ chrome.webNavigation.onCompleted.addListener(details => {
       files: ['content-scripts/user-view-controller.js']
     }
   , () => {
-    const sendMsg = (message) => chrome.tabs.sendMessage(details.tabId, message)
+    const sendMsg = message => chrome.tabs.sendMessage(details.tabId, message, { frameId: details.frameId })
 
     chrome.storage.local.get(['goal'], ({ goal }) => {
       goal ? sendMsg({goalActive: true}) : sendMsg({goalInactive: true})
     })
   })
 
+})
+
+chrome.runtime.onMessage.addListener((message, sender) => {
+  const sendMsg = message => chrome.tabs.sendMessage(sender.tab.id, message, { frameId: sender.frameId })
+
+  if ('goalSet' in message) {
+    // chrome.storage.local.set({ goal: message.goalSet })
+    sendMsg({goalActive: true})
+  }
+
+  if ('goalStatus' in message) {
+    // chrome.storage.local.remove("goal");
+    sendMsg({goalInactive: true})
+  }
 })
 
 chrome.webNavigation.onCommitted.addListener((details) => {
