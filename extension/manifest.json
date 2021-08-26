@@ -10,7 +10,7 @@
   },
   "web_accessible_resources": [
     {
-      "resources": [ "/fonts/*" ],
+      "resources": [ "/fonts/*", "*.css" ],
       "matches": [ "<all_urls>" ]
     }
   ],

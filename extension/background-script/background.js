@@ -1,5 +1,3 @@
-import { injectCSSAndFonts } from './utils/script-injection.js'
-
 chrome.runtime.onInstalled.addListener(({ reason }) => {
   if (reason === "install") {
     chrome.storage.local.clear();
@@ -9,7 +7,6 @@ chrome.runtime.onInstalled.addListener(({ reason }) => {
 chrome.webNavigation.onCompleted.addListener(details => {
   if (details.frameId !== 0) { return null }
 
-  injectCSSAndFonts(details.tabId, [details.frameId])
   chrome.scripting.executeScript(
     {
       target: {tabId: details.tabId, frameIds: [details.frameId]},
