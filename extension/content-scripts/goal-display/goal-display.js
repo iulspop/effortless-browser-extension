@@ -1,4 +1,9 @@
-import { createGoalDisplay } from './create-goal-display.js'
-import { deleteGoalDisplay } from './delete-goal-display.js'
+import { createGoalDisplay } from './utils/create-goal-display.js'
+import { deleteGoalDisplay } from './utils/delete-goal-display.js'
 
-export { createGoalDisplay, deleteGoalDisplay }
+let goalDisplay = {
+  create: createGoalDisplay,
+  delete: deleteGoalDisplay
+}
+
+export { goalDisplay }

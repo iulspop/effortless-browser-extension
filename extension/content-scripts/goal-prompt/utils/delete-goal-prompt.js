@@ -2,8 +2,8 @@ export function deleteGoalPrompt() {
   const bubble = document.getElementById("undistactable-extension-bubble");
   const background = document.getElementById("undistractable-extension-background");
 
-  bubble.remove();
-  background.remove();
-}
+  bubble?.remove();
+  background?.remove();
 
-deleteGoalPrompt()
+  console.log('Deleted Goal Prompt!')
+}

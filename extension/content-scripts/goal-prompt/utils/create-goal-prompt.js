@@ -1,4 +1,4 @@
-import createElement from '../utils/createElement.js'
+import createElement from '../../utils/createElement.js'
 
 function getFormDataAndSendMessage(event, form) {
   event.preventDefault();
@@ -35,6 +35,6 @@ export function createGoalPrompt() {
   document.body.appendChild(bubble);
 
   input.focus();
-}
 
-createGoalPrompt()
+  console.log('Created Goal Prompt!')
+}

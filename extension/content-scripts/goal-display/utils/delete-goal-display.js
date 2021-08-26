@@ -1,6 +1,6 @@
 export function deleteGoalDisplay() {
   const bubble = document.getElementById("undistractable-extension");
-  bubble.remove();
-}
+  bubble?.remove();
 
-deleteGoalDisplay()
+  console.log('Deleted Goal Display!')
+}

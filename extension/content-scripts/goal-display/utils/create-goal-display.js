@@ -1,4 +1,4 @@
-import createElement from '../utils/createElement.js'
+import createElement from '../../utils/createElement.js'
 
 function fetchStorage(keys) {
   return new Promise((resolve) => {
@@ -54,6 +54,6 @@ export async function createGoalDisplay() {
 
   const extensionWrapper = createElement('div', { id: "undistractable-extension" }, [goalDisplay])
   document.body.appendChild(extensionWrapper);
-}
 
-createGoalDisplay()
+  console.log('Created Goal Display!')
+}

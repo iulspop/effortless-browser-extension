@@ -1,4 +1,9 @@
-import { createGoalPrompt } from './create-goal-prompt.js'
-import { deleteGoalPrompt } from './delete-goal-prompt.js'
+import { createGoalPrompt } from './utils/create-goal-prompt.js'
+import { deleteGoalPrompt } from './utils/delete-goal-prompt.js'
 
-export { createGoalPrompt, deleteGoalPrompt }
+let goalPrompt = {
+  create: createGoalPrompt,
+  delete: deleteGoalPrompt
+}
+
+export { goalPrompt }
