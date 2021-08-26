@@ -1,4 +1,4 @@
-import { injectGoalPrompt, cleanupGoalPrompt, injectGoalDisplay, cleanupGoalDisplay } from './utils/script-injection.js'
+import { injectCSSAndFonts, injectGoalPrompt, cleanupGoalPrompt, injectGoalDisplay, cleanupGoalDisplay } from './utils/script-injection.js'
 
 chrome.runtime.onInstalled.addListener(({ reason }) => {
   if (reason === "install") {
@@ -9,6 +9,7 @@ chrome.runtime.onInstalled.addListener(({ reason }) => {
 chrome.webNavigation.onCompleted.addListener(details => {
   if (details.frameId !== 0) { return null }
 
+  injectCSSAndFonts(details.tabId, [details.frameId])
   chrome.scripting.executeScript(
     {
       target: {tabId: details.tabId},

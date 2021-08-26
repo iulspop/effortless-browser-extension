@@ -1,5 +1,27 @@
 import { insertCSS, removeCSS, insertCSSFile, removeCSSFile, executeScript } from './utils.js'
 
+function injectCSSAndFonts(tabId, frameIds) {
+  insertCSS(
+    tabId,
+    `@font-face {
+      font-family: "Lato";
+      src: url(${chrome.runtime.getURL('fonts/Lato-Regular.ttf')}) format("truetype"),
+           url(${chrome.runtime.getURL('fonts/Lato-Bold.ttf')}) format("truetype");
+    }`,
+    frameIds
+  );
+  insertCSSFile(
+    tabId,
+    'content-scripts/goal-prompt/goal-prompt.css',
+    frameIds
+  );
+  insertCSSFile(
+    tabId,
+    'content-scripts/goal-display/goal-display.css',
+    frameIds
+  );
+}
+
 function injectGoalPrompt(tabId, frameIds) {
   insertCSS(
     tabId,
@@ -88,4 +110,4 @@ function cleanupGoalDisplay(tabId, frameIds) {
   );
 }
 
-export { injectGoalPrompt, cleanupGoalPrompt, injectGoalDisplay, cleanupGoalDisplay }
+export { injectCSSAndFonts, injectGoalPrompt, cleanupGoalPrompt, injectGoalDisplay, cleanupGoalDisplay }
