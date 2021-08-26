@@ -12,7 +12,7 @@ chrome.webNavigation.onCompleted.addListener(details => {
   injectCSSAndFonts(details.tabId, [details.frameId])
   chrome.scripting.executeScript(
     {
-      target: {tabId: details.tabId},
+      target: {tabId: details.tabId, frameIds: [details.frameId]},
       files: ['content-scripts/user-view-controller.js']
     }
   , () => {
