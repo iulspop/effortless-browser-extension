@@ -72,6 +72,15 @@ if (isTest) {
       strict: true
     }
   })
+  config.module.rules.push({
+    test: /background\.js$/,
+    loader: 'string-replace-loader',
+    options: {
+      search: /(?<=^.*)/,
+      replace: 'import "../../cypress/plugins/message-relay-extension/setupOnMessageExternalListener.js"\n',
+      strict: true
+    }
+  })
 }
 
 module.exports = config
