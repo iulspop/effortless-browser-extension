@@ -1,6 +1,7 @@
+@import '../nudges.scss';
+
 #undistractable-extension {
   & .display {
-    box-sizing: border-box !important;
     width: 100vw;
     height: 40px;
     padding: 5px 0 5px 0;
@@ -16,11 +17,6 @@
     flex-direction: row;
     justify-content: space-around;
     align-items: center;
-
-    font-family: Lato, sans-serif;
-    font-size: 14px !important;
-    line-height: 1.6;
-    overflow-wrap: normal;
 
     animation-name: moveInRight;
     animation-duration: .4s;
