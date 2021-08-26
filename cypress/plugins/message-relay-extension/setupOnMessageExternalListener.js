@@ -8,11 +8,16 @@ chrome.runtime.onMessageExternal.addListener((message, sender, sendResponse) => 
 
   if (message.resetState === true) {
     chrome.storage.local.clear();
-    sendResponse({message: "Reset the storage. Yay!"});
+    sendResponse({message: "Extension state reset"});
   }
 
   if (message.setState === true) {
     chrome.storage.local.set(message.newState);
-    sendResponse({message: "Set the new state. Yay!"});
+    sendResponse({message: "New extension state"});
+  }
+
+  if (message.reload === true) {
+    chrome.runtime.reload()
+    sendResponse({message: "Extension reloaded"});
   }
 });

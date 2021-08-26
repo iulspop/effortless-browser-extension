@@ -1,4 +1,4 @@
-(function insertMesssageRelay() {
+(function insertMessageRelay() {
   window.document.addEventListener("messageToRelay", event => {
     let data = event.detail;
     let extensionId = data.extensionId;
@@ -8,12 +8,9 @@
       console.log(`Message sent successfully!`)
       console.log('This message was sent:')
       console.log(message)
-      console.log(`to the extension with the id of: ${extensionId}`)
       console.log('The response from the extension:')
-      console.log(response)
+      console.log(response.message)
+      console.log('===================================================');
     })
-
-    console.log('Tried sending this data:')
-    console.log(data);
   })
 })()
