@@ -28,19 +28,8 @@ chrome.webNavigation.onCommitted.addListener((details) => {
   if (details.frameId !== 0) { return null }
 
   chrome.storage.local.get(['goal'], ({ goal }) => {
-    if (goal) { return null }
-
-    injectGoalPrompt(details.tabId, [details.frameId]);
-  });
-});
-
-chrome.webNavigation.onCommitted.addListener((details) => {
-  if (details.frameId !== 0) { return null }
-
-  chrome.storage.local.get(['goal'], ({ goal }) => {
-    if (!goal) { return null }
-
-    injectGoalDisplay(details.tabId, [details.frameId]);
+    if (!goal) { injectGoalPrompt(details.tabId, [details.frameId])  }
+    if (goal)  { injectGoalDisplay(details.tabId, [details.frameId]) }
   });
 });
 
@@ -51,9 +40,7 @@ chrome.runtime.onMessage.addListener((message, sender) => {
     cleanupGoalPrompt(sender.tab.id, [sender.frameId]);
     injectGoalDisplay(sender.tab.id, [sender.frameId]);
   }
-});
 
-chrome.runtime.onMessage.addListener((message, sender) => {
   if ('goalStatus' in message) {
     chrome.storage.local.remove("goal");
 
@@ -62,6 +49,7 @@ chrome.runtime.onMessage.addListener((message, sender) => {
   }
 });
 
+// Used to control extension state when running e2e tests with Cypress
 chrome.runtime.onMessageExternal.addListener((message, sender, sendResponse) => {
   console.log('Received message:');
   console.log(message);
