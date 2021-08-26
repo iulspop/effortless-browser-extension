@@ -1,8 +1,10 @@
-const path = require('path');
-const createEntryPoints = require('./createEntryPoints');
-const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const CopyPlugin = require("copy-webpack-plugin");
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+
+const path = require('path');
 const exec = require('child_process').exec;
+const createEntryPoints = require('./createEntryPoints');
 
 const isTest = process.argv.includes('testing');
 
@@ -33,6 +35,7 @@ config = {
     ],
   },
   plugins: [
+    new CleanWebpackPlugin(),
     new MiniCssExtractPlugin(),
     new CopyPlugin({
       patterns: [

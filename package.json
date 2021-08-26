@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.js",
   "devDependencies": {
+    "clean-webpack-plugin": "^4.0.0-alpha.0",
     "copy-webpack-plugin": "^9.0.1",
     "css-loader": "^6.2.0",
     "cypress": "^8.1.0",
