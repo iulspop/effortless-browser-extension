@@ -12,12 +12,12 @@ function injectGoalPrompt(tabId, frameIds) {
   );
   insertCSSFile(
     tabId,
-    'content-scripts/create-goal-prompt/create-goal-prompt.css',
+    'content-scripts/goal-prompt/goal-prompt.css',
     frameIds
   );
   executeScript(
     tabId,
-    'content-scripts/create-goal-prompt/create-goal-prompt.js',
+    'content-scripts/goal-prompt/create-goal-prompt.js',
     frameIds
   );
 }
@@ -25,12 +25,12 @@ function injectGoalPrompt(tabId, frameIds) {
 function cleanupGoalPrompt(tabId, frameIds) {
   executeScript(
     tabId,
-    'content-scripts/create-goal-prompt/delete-goal-prompt.js',
+    'content-scripts/goal-prompt/delete-goal-prompt.js',
     frameIds
   );
   removeCSSFile(
     tabId,
-    'content-scripts/create-goal-prompt/create-goal-prompt.css',
+    'content-scripts/goal-prompt/goal-prompt.css',
     frameIds
   );
   removeCSS(
@@ -56,12 +56,12 @@ function injectGoalDisplay(tabId, frameIds) {
   );
   insertCSSFile(
     tabId,
-    'content-scripts/create-goal-display/create-goal-display.css',
+    'content-scripts/goal-display/goal-display.css',
     frameIds
   );
   executeScript(
     tabId,
-    'content-scripts/create-goal-display/create-goal-display.js',
+    'content-scripts/goal-display/create-goal-display.js',
     frameIds
   );
 }
@@ -69,12 +69,12 @@ function injectGoalDisplay(tabId, frameIds) {
 function cleanupGoalDisplay(tabId, frameIds) {
   executeScript(
     tabId,
-    'content-scripts/create-goal-display/delete-goal-display.js',
+    'content-scripts/goal-display/delete-goal-display.js',
     frameIds
   );
   removeCSSFile(
     tabId,
-    'content-scripts/create-goal-display/create-goal-display.css',
+    'content-scripts/goal-display/goal-display.css',
     frameIds
   );
   removeCSS(
