@@ -1,3 +1,5 @@
+import { injectNudges, messenger } from './utils/utils.js'
+
 chrome.runtime.onInstalled.addListener(({ reason }) => {
   if (reason === "install") {
     chrome.storage.local.clear();
@@ -7,32 +9,27 @@ chrome.runtime.onInstalled.addListener(({ reason }) => {
 chrome.webNavigation.onCompleted.addListener(details => {
   if (details.frameId !== 0) { return null }
 
-  chrome.scripting.executeScript(
-    {
-      target: {tabId: details.tabId, frameIds: [details.frameId]},
-      files: ['content-scripts/user-view-controller.js']
-    }
-  , () => {
-    const sendMsg = message => chrome.tabs.sendMessage(details.tabId, message, { frameId: details.frameId })
+  injectNudges(details.tabId, [details.frameId], () => {
+    const send = messenger(details.tabId, details.frameId)
 
     chrome.storage.local.get(['goal'], ({ goal }) => {
-      goal ? sendMsg({goalActive: true}) : sendMsg({goalInactive: true})
+      goal ? send({goalActive: true}) : send({goalInactive: true})
     })
   })
 
 })
 
 chrome.runtime.onMessage.addListener((message, sender) => {
-  const sendMsg = message => chrome.tabs.sendMessage(sender.tab.id, message, { frameId: sender.frameId })
+  const send = messenger(sender.tab.id, sender.frameId)
 
   if ('goalSet' in message) {
     chrome.storage.local.set({ goal: message.goalSet })
-    sendMsg({goalActive: true})
+    send({goalActive: true})
   }
 
   if ('goalStatus' in message) {
     chrome.storage.local.remove("goal");
-    sendMsg({goalInactive: true})
+    send({goalInactive: true})
   }
 })
 
