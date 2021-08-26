@@ -13,5 +13,9 @@ describe('Goal Prompt Popup', () => {
       cy.get('[data-cy=goal-prompt-popup]').should('not.exist')
       cy.get('[data-cy=goal-display]').should('be.visible')
     });
+
+    it('user cannot scroll the page', () => {
+      cy.get('html').should('have.class', 'u-disable-scrolling')
+    })
   })
 })

@@ -3,13 +3,17 @@ describe('Goal Prompt Display', () => {
     beforeEach(() => {
       cy.setExtensionState({goal: 'Learn just enough from Cypress docs so I can write my tests'})
 
-      cy.visit('/google')
+      cy.visit('/duckduckgo')
     })
 
     it('user sees goal they set', () => {
       cy.get('[data-cy=goal-display]').should('be.visible')
 
       cy.get('[data-cy=goal-display]').should('contain', 'Learn just enough from Cypress docs so I can write my tests')
+    })
+
+    it('user can scroll the page', () => {
+      cy.get('html').should('not.have.class', 'u-disable-scrolling')
     })
 
     it('user marks goal complete and goal prompt appears', () => {

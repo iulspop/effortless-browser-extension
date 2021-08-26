@@ -4,6 +4,7 @@ export function deleteGoalPrompt() {
 
   bubble?.remove();
   background?.remove();
+  document.querySelector('html').classList.toggle('u-disable-scrolling')
 
   console.log('Deleted Goal Prompt!')
 }

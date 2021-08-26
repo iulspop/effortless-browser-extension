@@ -16,6 +16,8 @@ function saveElements(listener, ...elements) {
 }
 
 export function createGoalPrompt() {
+  document.querySelector('html').classList.toggle('u-disable-scrolling')
+
   const label = createElement('label', { id: "undistractable-extension-label", for:"undistractable-extension-input", textContent: "What outcome do you seek?" });
   const input = createElement('input', { id: "undistractable-extension-input", type:"text", name:"goal"});
   input.setAttribute("data-cy", "goal-input");
