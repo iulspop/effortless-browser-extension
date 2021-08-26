@@ -6,6 +6,24 @@ chrome.runtime.onInstalled.addListener(({ reason }) => {
   }
 });
 
+chrome.webNavigation.onCompleted.addListener(details => {
+  if (details.frameId !== 0) { return null }
+
+  chrome.scripting.executeScript(
+    {
+      target: {tabId: details.tabId},
+      files: ['content-scripts/user-view-controller.js']
+    }
+  , () => {
+    const sendMsg = (message) => chrome.tabs.sendMessage(details.tabId, message)
+
+    chrome.storage.local.get(['goal'], ({ goal }) => {
+      goal ? sendMsg({goalActive: true}) : sendMsg({goalInactive: true})
+    })
+  })
+
+})
+
 chrome.webNavigation.onCommitted.addListener((details) => {
   if (details.frameId !== 0) { return null }
 
