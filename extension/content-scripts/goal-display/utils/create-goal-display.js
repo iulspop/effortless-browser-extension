@@ -34,10 +34,10 @@ export function createGoalDisplay(goal) {
   document.body.insertAdjacentHTML('beforeend', display)
 
   document.querySelector('[data-cy="complete-button"]')
-          .addEventListener('click', send({goalStatus: "completed"}), true);
+          .addEventListener('click', send({goalStatus: true, status: "completed"}), true);
 
   document.querySelector('[data-cy="interupt-button"]')
-          .addEventListener('click', send({goalStatus: "interrupted"}), true);
+          .addEventListener('click', send({goalStatus: true, status: "interrupted"}), true);
 
   const goalDisplay = document.querySelector('#undistractable-extension .display')
   const retractButton = document.querySelector('[data-cy="retract-button"]')

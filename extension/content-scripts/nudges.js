@@ -19,7 +19,7 @@ chrome.runtime.onMessage.addListener(message => {
     goalDisplay.create(message.goal)
     goalPrompt.delete()
   }
-  if (message.goalInactive === true) {
+  if (message.goalActive === false) {
     console.log('Goal Inactive!')
     goalPrompt.create()
     goalDisplay.delete()
