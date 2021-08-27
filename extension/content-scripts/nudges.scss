@@ -8,3 +8,7 @@
     overflow-wrap: normal;
   }
 }
+
+.u-disable-scrolling {
+  overflow: hidden !important;
+}

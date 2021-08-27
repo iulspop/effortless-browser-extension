@@ -1,26 +1,6 @@
-function sendMessage(data) {
-  chrome.runtime.sendMessage(data);
-}
-
-function send(data) {
-  return () => sendMessage(data);
-}
-
-function toggle(node, klass) {
-  node.classList.toggle(klass)
-}
-
-function toggleClass(node, klass) {
-  return () => toggle(node, klass)
-}
-
-function alternateSign(node) {
-  return () => { node.textContent === "<<" ? node.textContent = ">>" : node.textContent = "<<" }
-}
-
 export function createGoalDisplay(goal) {
   const display = `
-    <div id="undistractable-extension">
+    <div id="indistractable-extension">
       <div class="display" data-cy="goal-display">
         <p class="display__description">${goal}</p>
         <div>
@@ -39,8 +19,28 @@ export function createGoalDisplay(goal) {
   document.querySelector('[data-cy="interupt-button"]')
           .addEventListener('click', send({goalStatus: true, status: "interrupted"}), true);
 
-  const goalDisplay = document.querySelector('#undistractable-extension .display')
+  const goalDisplay = document.querySelector('#indistractable-extension .display')
   const retractButton = document.querySelector('[data-cy="retract-button"]')
   retractButton.addEventListener('click', alternateSign(retractButton), true)
   retractButton.addEventListener('click', toggleClass(goalDisplay, "display--retracted"), true)
+}
+
+function sendMessage(data) {
+  chrome.runtime.sendMessage(data);
+}
+
+function send(data) {
+  return () => sendMessage(data);
+}
+
+function toggle(node, klass) {
+  node.classList.toggle(klass)
+}
+
+function toggleClass(node, klass) {
+  return () => toggle(node, klass)
+}
+
+function alternateSign(node) {
+  return () => { node.textContent === "<<" ? node.textContent = ">>" : node.textContent = "<<" }
 }

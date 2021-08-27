@@ -1,3 +1,26 @@
+export function createGoalPrompt() {
+  const prompt = `
+    <div id="indistractable-extension">
+      <div class="background"></div>
+      <div class="prompt" data-cy="goal-prompt-popup">
+        <form class="form">
+          <label class="form__label" for="goal">What outcome do you seek?</label>
+          <input class="form__input" type="text" name="goal" data-cy="goal-input">
+          <button class="form__button" data-cy="start-button">Go</button>
+        </form>
+      </div>
+    </div>
+  `
+  document.body.insertAdjacentHTML('beforeend', prompt)
+
+  document.querySelector('html').classList.toggle('u-disable-scrolling')
+  document.querySelector('#indistractable-extension [name="goal"]').focus()
+
+  const form   = document.querySelector('#indistractable-extension .form')
+  const button = document.querySelector('#indistractable-extension .form__button')
+  button.addEventListener('click', saveElements(getFormDataAndSendMessage, form), true);
+}
+
 function getFormDataAndSendMessage(event, form) {
   event.preventDefault();
 
@@ -10,24 +33,3 @@ function getFormDataAndSendMessage(event, form) {
 }
 
 const saveElements = (listener, ...elements) => event => listener(event, ...elements)
-
-export function createGoalPrompt() {
-  const prompt = `
-    <div id="undistractable-extension-background"></div>
-    <div id="undistactable-extension-bubble" data-cy="goal-prompt-popup">
-      <form id="undistactable-extension-form">
-        <label id="undistractable-extension-label">What outcome do you seek?</label>
-        <input id="undistractable-extension-input" type="text" name="goal" data-cy="goal-input">
-        <button id="undistractable-extension-button" data-cy="start-button">Go</button>
-      </form>
-    </div>
-  `
-  document.body.insertAdjacentHTML('beforeend', prompt)
-
-  document.querySelector('html').classList.toggle('u-disable-scrolling')
-  document.querySelector('#undistractable-extension-input').focus()
-
-  const form   = document.querySelector('#undistactable-extension-form')
-  const button = document.querySelector('#undistractable-extension-button')
-  button.addEventListener('click', saveElements(getFormDataAndSendMessage, form), true);
-}

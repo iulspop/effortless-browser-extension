@@ -3,8 +3,6 @@ import { goalDisplay } from './goal-display/goal-display.js'
 import { injectFont }  from './utils/injectFont.js'
 import { injectStylesheet } from './utils/injectStylesheet.js'
 
-console.log("Controller Loaded.")
-
 injectFont(`@font-face {
   font-family: "Lato";
   src: url(${chrome.runtime.getURL('fonts/Lato-Regular.ttf')}) format("truetype"),
@@ -15,13 +13,11 @@ injectStylesheet('content-scripts/goal-display/goal-display.css')
 
 chrome.runtime.onMessage.addListener(message => {
   if (message.goalActive === true) {
-    console.log('Goal Active!')
-    goalDisplay.create(message.goal)
     goalPrompt.delete()
+    goalDisplay.create(message.goal)
   }
   if (message.goalActive === false) {
-    console.log('Goal Inactive!')
-    goalPrompt.create()
     goalDisplay.delete()
+    goalPrompt.create()
   }
 })
