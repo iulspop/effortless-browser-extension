@@ -7,3 +7,7 @@ before(() => {
 beforeEach(() => {
   cy.resetExtensionState()
 })
+
+afterEach(() => {
+  cy.resetExtensionState()
+})
