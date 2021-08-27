@@ -12,8 +12,6 @@ function getFormDataAndSendMessage(event, form) {
 const saveElements = (listener, ...elements) => event => listener(event, ...elements)
 
 export function createGoalPrompt() {
-  document.querySelector('html').classList.toggle('u-disable-scrolling')
-
   const prompt = `
     <div id="undistractable-extension-background"></div>
     <div id="undistactable-extension-bubble" data-cy="goal-prompt-popup">
@@ -24,13 +22,12 @@ export function createGoalPrompt() {
       </form>
     </div>
   `
-
   document.body.insertAdjacentHTML('beforeend', prompt)
 
-  const input  = document.querySelector('#undistractable-extension-input')
+  document.querySelector('html').classList.toggle('u-disable-scrolling')
+  document.querySelector('#undistractable-extension-input').focus()
+
   const form   = document.querySelector('#undistactable-extension-form')
   const button = document.querySelector('#undistractable-extension-button')
-
-  input.focus();
   button.addEventListener('click', saveElements(getFormDataAndSendMessage, form), true);
 }
