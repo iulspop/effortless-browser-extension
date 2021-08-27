@@ -1,5 +1,3 @@
-import createElement from '../../utils/createElement.js'
-
 function getFormDataAndSendMessage(event, form) {
   event.preventDefault();
 
@@ -11,32 +9,28 @@ function getFormDataAndSendMessage(event, form) {
   chrome.runtime.sendMessage(data);
 }
 
-function saveElements(listener, ...elements) {
-  return event => listener(event, ...elements);
-}
+const saveElements = (listener, ...elements) => event => listener(event, ...elements)
 
 export function createGoalPrompt() {
   document.querySelector('html').classList.toggle('u-disable-scrolling')
 
-  const label = createElement('label', { id: "undistractable-extension-label", for:"undistractable-extension-input", textContent: "What outcome do you seek?" });
-  const input = createElement('input', { id: "undistractable-extension-input", type:"text", name:"goal"});
-  input.setAttribute("data-cy", "goal-input");
-  const button = createElement('button', { id: "undistractable-extension-button", textContent: "Go"});
-  button.setAttribute("data-cy", "start-button");
+  const prompt = `
+    <div id="undistractable-extension-background"></div>
+    <div id="undistactable-extension-bubble" data-cy="goal-prompt-popup">
+      <form id="undistactable-extension-form">
+        <label id="undistractable-extension-label">What outcome do you seek?</label>
+        <input id="undistractable-extension-input" type="text" name="goal" data-cy="goal-input">
+        <button id="undistractable-extension-button" data-cy="start-button">Go</button>
+      </form>
+    </div>
+  `
 
-  const form = createElement('form', {id: "undistactable-extension-form"}, [label, input, button]);
+  document.body.insertAdjacentHTML('beforeend', prompt)
 
-  const getFormDataAndSendMessageClosure = saveElements(getFormDataAndSendMessage, form);
-  button.addEventListener('click', getFormDataAndSendMessageClosure, true);
-
-  const bubble = createElement('div', {id: "undistactable-extension-bubble"}, [form]);
-  bubble.setAttribute("data-cy", "goal-prompt-popup");
-  const background = createElement('div', {id: "undistractable-extension-background"});
-
-  document.body.appendChild(background);
-  document.body.appendChild(bubble);
+  const input  = document.querySelector('#undistractable-extension-input')
+  const form   = document.querySelector('#undistactable-extension-form')
+  const button = document.querySelector('#undistractable-extension-button')
 
   input.focus();
-
-  console.log('Created Goal Prompt!')
+  button.addEventListener('click', saveElements(getFormDataAndSendMessage, form), true);
 }
