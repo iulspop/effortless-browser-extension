@@ -1,9 +1,3 @@
-function fetchStorage(keys) {
-  return new Promise((resolve) => {
-    chrome.storage.local.get(keys, (items) => resolve(items));
-  });
-}
-
 function sendMessage(data) {
   chrome.runtime.sendMessage(data);
 }
@@ -24,9 +18,7 @@ function alternateSign(node) {
   return () => { node.textContent === "<<" ? node.textContent = ">>" : node.textContent = "<<" }
 }
 
-export async function createGoalDisplay() {
-  const goal = await fetchStorage(['goal']).then((items) => items.goal)
-
+export function createGoalDisplay(goal) {
   const display = `
     <div id="undistractable-extension">
       <div class="display" data-cy="goal-display">

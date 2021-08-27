@@ -16,7 +16,7 @@ injectStylesheet('content-scripts/goal-display/goal-display.css')
 chrome.runtime.onMessage.addListener(message => {
   if (message.goalActive === true) {
     console.log('Goal Active!')
-    goalDisplay.create()
+    goalDisplay.create(message.goal)
     goalPrompt.delete()
   }
   if (message.goalInactive === true) {

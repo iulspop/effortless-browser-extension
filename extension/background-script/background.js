@@ -13,10 +13,9 @@ chrome.webNavigation.onCompleted.addListener(details => {
     const send = messenger(details.tabId, details.frameId)
 
     chrome.storage.local.get(['goal'], ({ goal }) => {
-      goal ? send({goalActive: true}) : send({goalInactive: true})
+      goal ? send({goalActive: true, goal}) : send({goalInactive: true})
     })
   })
-
 })
 
 chrome.runtime.onMessage.addListener((message, sender) => {
@@ -24,7 +23,7 @@ chrome.runtime.onMessage.addListener((message, sender) => {
 
   if ('goalSet' in message) {
     chrome.storage.local.set({ goal: message.goalSet })
-    send({goalActive: true})
+    send({goalActive: true, goal: message.goalSet})
   }
 
   if ('goalStatus' in message) {
