@@ -1,5 +1,3 @@
-import createElement from '../../utils/createElement.js'
-
 function fetchStorage(keys) {
   return new Promise((resolve) => {
     chrome.storage.local.get(keys, (items) => resolve(items));
@@ -10,50 +8,47 @@ function sendMessage(data) {
   chrome.runtime.sendMessage(data);
 }
 
-function createSendMessageClosure(data) {
+function send(data) {
   return () => sendMessage(data);
 }
 
-function toggleClass(node, klass) {
+function toggle(node, klass) {
   node.classList.toggle(klass)
 }
 
-function createToggleClassClosure(node, klass) {
-  return () => toggleClass(node, klass)
+function toggleClass(node, klass) {
+  return () => toggle(node, klass)
 }
 
-function createAlternateSignClosure(node) {
+function alternateSign(node) {
   return () => { node.textContent === "<<" ? node.textContent = ">>" : node.textContent = "<<" }
 }
 
 export async function createGoalDisplay() {
-  const sendCompleted = createSendMessageClosure({goalStatus: "completed"})
-  const sendInterrupted = createSendMessageClosure({goalStatus: "interrupted"})
-  const goal = await fetchStorage(['goal']).then((items) => items.goal);
+  const goal = await fetchStorage(['goal']).then((items) => items.goal)
 
-  const description = createElement('p', { className: "display__description", textContent: goal });
+  const display = `
+    <div id="undistractable-extension">
+      <div class="display" data-cy="goal-display">
+        <p class="display__description">${goal}</p>
+        <div>
+          <button class="display__button" data-cy="complete-button">Complete</button>
+          <button class="display__button" data-cy="interupt-button">Interrupted</button>
+        </div>
+        <button class="display__retract-button" data-cy="retract-button">&lt;&lt;</button>
+      </div>
+    </div>
+  `
+  document.body.insertAdjacentHTML('beforeend', display)
 
-  const completeButton = createElement('button', { className: "display__button", textContent: "Complete" })
-  completeButton.setAttribute("data-cy", "complete-button");
-  completeButton.addEventListener('click', sendCompleted, true);
+  document.querySelector('[data-cy="complete-button"]')
+          .addEventListener('click', send({goalStatus: "completed"}), true);
 
-  const interuptButton = createElement('button', { className: "display__button", textContent: "Interrupted" })
-  interuptButton.addEventListener('click', sendInterrupted, true);
-  interuptButton.setAttribute("data-cy", "interupt-button");
+  document.querySelector('[data-cy="interupt-button"]')
+          .addEventListener('click', send({goalStatus: "interrupted"}), true);
 
-  const buttons = createElement('div', {}, [completeButton, interuptButton])
-
-  const retractButton = createElement('button', { className: "display__retract-button", textContent: "<<" })
-  retractButton.setAttribute("data-cy", "retract-button");
-  retractButton.addEventListener('click', createAlternateSignClosure(retractButton), true)
-
-  const goalDisplay = createElement('div', { className: "display" }, [description, buttons, retractButton]);
-  goalDisplay.setAttribute("data-cy", "goal-display");
-
-  retractButton.addEventListener('click', createToggleClassClosure(goalDisplay, "display--retracted"), true)
-
-  const extensionWrapper = createElement('div', { id: "undistractable-extension" }, [goalDisplay])
-  document.body.appendChild(extensionWrapper);
-
-  console.log('Created Goal Display!')
+  const goalDisplay = document.querySelector('#undistractable-extension .display')
+  const retractButton = document.querySelector('[data-cy="retract-button"]')
+  retractButton.addEventListener('click', alternateSign(retractButton), true)
+  retractButton.addEventListener('click', toggleClass(goalDisplay, "display--retracted"), true)
 }
