@@ -1,6 +1,9 @@
 @import '../nudges.scss';
 
 #indistractable-extension {
+  animation-name: fadeIn;
+  animation-duration: .2s;
+
   & .background {
     width: 100vw;
     height: 100vh;
@@ -10,7 +13,7 @@
     left: 50vw;
     top: 50vh;
     transform: translate(-50%, -50%);
-    z-index: 99998;
+    z-index: 2147483648;
   }
 
   & .prompt {
@@ -24,7 +27,7 @@
     left: 50vw;
     top: 50vh;
     transform: translate(-50%, -50%);
-    z-index: 99999;
+    z-index: 2147483649;
   }
 
   & .form {
@@ -100,5 +103,15 @@
         font-size: 17px;
       }
     }
+  }
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
   }
 }
