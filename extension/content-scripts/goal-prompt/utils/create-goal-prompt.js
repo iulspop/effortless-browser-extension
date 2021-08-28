@@ -5,8 +5,10 @@ export function createGoalPrompt() {
       <div class="prompt" data-cy="goal-prompt-popup">
         <form class="form">
           <label class="form__label" for="goal">What outcome do you seek?</label>
-          <input class="form__input" type="text" name="goal" data-cy="goal-input">
-          <button class="form__button" data-cy="start-button">Go</button>
+          <div class form__input-container>
+            <input class="form__input" type="text" name="goal" data-cy="goal-input">
+            <button class="form__button" data-cy="start-button">Go</button>
+          </div>
         </form>
       </div>
     </div>
