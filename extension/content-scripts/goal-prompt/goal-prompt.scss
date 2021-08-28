@@ -17,8 +17,6 @@
   }
 
   & .prompt {
-    box-sizing: border-box !important;
-
     width: 480px;
     padding: 20px;
     padding-top: 15px;
@@ -36,11 +34,9 @@
     &__label {
       display: block;
 
-      margin-left: 7px;
-
-      font-family: "Lato", sans-serif;
       font-size: 22px;
       text-align: left;
+      margin-left: 7px;
     }
 
     &__input-container {
@@ -52,8 +48,6 @@
     }
 
     &__input {
-      box-sizing: border-box !important;
-
       height: 60px;
       width: 360px;
       padding: 0;

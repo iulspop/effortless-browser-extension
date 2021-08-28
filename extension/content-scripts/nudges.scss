@@ -1,14 +1,29 @@
-#undistractable-extension {
+#indistractable-extension {
   & * {
     box-sizing: border-box !important;
 
     font-family: Lato, sans-serif;
-    font-size: 14px !important;
     line-height: 1.6;
     overflow-wrap: normal;
+  }
+
+  /* Remove Arrow/Spinner on number type input */
+  /* Chrome, Safari, Edge, Opera */
+  & input::-webkit-outer-spin-button,
+  & input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+  }
+
+  /* Firefox */
+  & input[type=number] {
+    -moz-appearance: textfield;
   }
 }
 
 .u-disable-scrolling {
   overflow: hidden !important;
+}
+
+.u-hidden {
+  display: none;
 }
