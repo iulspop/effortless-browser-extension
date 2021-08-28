@@ -3,7 +3,7 @@ describe('Goal Prompt Display', () => {
     beforeEach(() => {
       cy.setExtensionState({goal: 'Learn just enough from Cypress docs so I can write my tests'})
 
-      cy.visit('/duckduckgo')
+      cy.visit('/turtle')
     })
 
     it('user sees goal they set', () => {
@@ -13,6 +13,10 @@ describe('Goal Prompt Display', () => {
     })
 
     it('user can scroll the page', () => {
+      //Without the wait, Cypress will check the below assertion and succeed, 
+      //without retrying and failing once the class is added.
+      cy.wait(500)
+
       cy.get('html').should('not.have.class', 'u-disable-scrolling')
     })
 
