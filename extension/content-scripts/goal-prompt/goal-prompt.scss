@@ -22,7 +22,7 @@
 
     position: fixed;
     left: 50vw;
-    top: 45vh;
+    top: 50vh;
     transform: translate(-50%, -50%);
     z-index: 99999;
   }
@@ -41,7 +41,7 @@
     }
 
     &__input-container {
-      margin: 10px 0 0 0;
+      margin: 10px 0 15px 0;
 
       display: flex;
       flex-direction: row;
@@ -89,6 +89,15 @@
         transform: translate(-50%, -50%);
 
         fill: rgb(95, 95, 95);
+      }
+    }
+
+    &__question-numberer {
+      font-size: 15px;
+      color: rgb(204, 203, 203);
+
+      &__number {
+        font-size: 17px;
       }
     }
   }
