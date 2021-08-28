@@ -1,7 +1,7 @@
 describe('Goal Prompt Popup', () => {
   context('A goal is not set and the user visits a page', () => {
     beforeEach(() => {
-      cy.visit('/google');
+      cy.visit('/turtle');
     })
 
     it('user sees the goal prompt pop up and enters their goal, the prompt disappear and the goal display appears', () => {
