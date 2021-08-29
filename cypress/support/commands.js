@@ -1,3 +1,5 @@
+import '@testing-library/cypress/add-commands'
+
 Cypress.Commands.add('sendMessage', (message) => {
   // The extension id in development
   // It remains constant because it is derived from the key in the manifest.json
