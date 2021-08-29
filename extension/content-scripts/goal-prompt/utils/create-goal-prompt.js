@@ -4,12 +4,12 @@ export function createGoalPrompt() {
       <div class="background"></div>
       <div class="prompt" data-cy="goal-prompt-popup">
         <form class="form">
-          <div class="question-1"><label class="form__label" for="goal">What outcome do you seek?</label></div>
-          <div class="question-2 u-hidden"><label class="form__label" for="time">How much time to hit that target?</label></div>
+          <div class="question-1"><label class="form__label" for="ie-goal">What outcome do you seek?</label></div>
+          <div class="question-2 u-hidden"><label class="form__label" for="ie-time">How much time to hit that target?</label></div>
           <div class="form__input-container">
-            <div class="question-1"><input class="form__input" type="text" name="goal"></div>
-            <div class="question-2 u-hidden"><input class="form__input" type="number" name="time"></div>
-            <button class="form__button">
+            <div class="question-1"><input class="form__input" type="text" id="ie-goal" name="goal"></div>
+            <div class="question-2 u-hidden"><input class="form__input" type="number" id="ie-time" name="time"></div>
+            <button class="form__button" alt="Continue to next question or complete form">
               <svg class="form__button__icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M13.025 1l-2.847 2.828 6.176 6.176h-16.354v3.992h16.354l-6.176 6.176 2.847 2.828 10.975-11z"/></svg>
             </button>
           </div>
