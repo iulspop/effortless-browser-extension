@@ -22,16 +22,6 @@ describe('Goal Prompt Display', () => {
       cy.findByLabelText(/what outcome do you seek?/i).should('be.visible')
     });
 
-    it('user clicks retract button to rectract the display to the left', () => {
-      cy.get('#indistractable-extension').findByRole('button', {name: '<<'}).click()
-
-      cy.findByTestId('goal-display').should('have.class', 'display--retracted')
-
-      cy.get('#indistractable-extension').findByRole('button', {name: '>>'}).click()
-
-      cy.findByTestId('goal-display').should('not.have.class', 'display--retracted')
-    });
-
     it('user can scroll the page', () => {
       // Covers a bug where the scrolling is disabled when it shouldn't be
 
