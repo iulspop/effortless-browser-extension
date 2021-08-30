@@ -44,33 +44,6 @@
       border: 1px solid rgb(214, 214, 214);
       background-color: white;
     }
-
-    &__retract-button {
-      font-family: Lato, sans-serif;
-      font-size: 14px !important;
-      line-height: 10px !important;
-
-      width: 40px;
-      height: 40px;
-      border: 0px;
-      background-color: white;
-
-      position: absolute;
-      right: 0px;
-
-      &:hover {
-        cursor: pointer;
-        background-color: lightgrey;
-      }
-    }
-
-    &--retracted {
-      animation-name: moveOutLeft;
-      animation-duration: .4s;
-      animation-timing-function: ease-out;
-
-      transform: translateX(-95%);
-    }
   }
 
   & .time-bubble {
