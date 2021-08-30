@@ -11,7 +11,7 @@ export function createGoalDisplay(goal) {
         </button>
         <button class="sidetab__button">
           <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M12 8v-5l9 9-9 9v-5h-12v-8h12zm12-4h-3v16h3v-16z"/></svg>
-          <span class="sidetab__button__label">Interupt</span>
+          <span class="sidetab__button__label">Interrupt</span>
         </button>
       </div>
       <div class="time-bubble">
