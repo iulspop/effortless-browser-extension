@@ -2,7 +2,7 @@ export function createGoalPrompt() {
   const prompt = `
     <div id="indistractable-extension">
       <div class="background"></div>
-      <div class="prompt" data-cy="goal-prompt-popup">
+      <div class="prompt">
         <form class="form">
           <div class="question-1"><label class="form__label" for="ie-goal">What outcome do you seek?</label></div>
           <div class="question-2 u-hidden"><label class="form__label" for="ie-time">How much time to hit that target?</label></div>

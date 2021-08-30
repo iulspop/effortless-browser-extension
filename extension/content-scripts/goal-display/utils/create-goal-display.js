@@ -1,14 +1,14 @@
 export function createGoalDisplay(goal) {
   const display = `
     <div id="indistractable-extension">
-      <div class="goal-bar" data-testid="goal-display">
+      <div class="goal-bar">
         <p class="goal-bar__text">${goal}</p>
         <div>
-          <button class="goal-bar__button" data-testid="complete-button">Complete</button>
-          <button class="goal-bar__button" data-testid="interupt-button">Interrupted</button>
+          <button class="goal-bar__button">Complete</button>
+          <button class="goal-bar__button">Interrupted</button>
         </div>
       </div>
-      <div class="time-bubble" data-testid="time-bubble">
+      <div class="time-bubble">
         <time class="time-bubble__timer">
           <span id="minutes">99</span>:<span id="seconds">99</span>
         </time>
@@ -17,10 +17,10 @@ export function createGoalDisplay(goal) {
   `
   document.body.insertAdjacentHTML('beforeend', display)
 
-  document.querySelector('[data-testid="complete-button"]')
+  document.querySelector('.goal-bar__button:first-child')
           .addEventListener('click', send({goalStatus: true, status: "completed"}), true)
 
-  document.querySelector('[data-testid="interupt-button"]')
+  document.querySelector('.goal-bar__button:last-child')
           .addEventListener('click', send({goalStatus: true, status: "interrupted"}), true)
 }
 
