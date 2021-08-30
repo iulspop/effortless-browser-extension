@@ -8,6 +8,11 @@ export function createGoalDisplay(goal) {
           <button class="display__button" data-testid="interupt-button">Interrupted</button>
         </div>
       </div>
+      <div class="time-bubble" data-testid="time-display">
+        <time class="time-bubble__timer">
+          <span id="minutes">99</span>:<span id="seconds">99</span>
+        </time>
+      </div>
     </div>
   `
   document.body.insertAdjacentHTML('beforeend', display)
