@@ -32,8 +32,8 @@
 
   & .sidetab {
     position: fixed;
-    top: 40vh;
-    left: 0;
+    bottom: 15vh;
+    right: 0;
     z-index: 99999999999;
 
     display: flex;
@@ -46,12 +46,21 @@
 
       cursor: pointer;
 
-      width: 90px;
+      width: 60px;
       height: 60px;
       margin-top: 15px;
       padding: 8px;
-      border: 1px solid rgb(214, 214, 214);
+      border: solid rgb(214, 214, 214);
+      border-top-width: 2px;
+      border-left-width: 2px;
+      border-bottom-width: 2px;
+      border-right-width: 0px;
       background-color: white;
+      box-shadow: -4px 4px 20px rgba(204, 204, 204, 0.2);
+
+      &__label {
+        font-size: 10px;
+      }
     }
   }
 
@@ -59,11 +68,13 @@
     width: 125px;
     height: 125px;
     border-radius: 100%;
+    border: 1px solid rgb(214, 214, 214);
+    background-color: white;
     box-shadow: 0px 7px 20px rgba(167, 167, 167, 0.2);
 
     position: fixed;
-    top: 15vh;
-    right: 15vh;
+    top: 10vh;
+    right: 5vh;
     z-index: 99999999999;
 
     &__timer {
