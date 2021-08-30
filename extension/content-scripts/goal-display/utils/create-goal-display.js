@@ -1,7 +1,7 @@
 export function createGoalDisplay(goal) {
   const display = `
     <div id="indistractable-extension">
-      <div class="goal-bar">
+      <div class="goal-bar u-fade-out">
         <p class="goal-bar__text">${goal}</p>
       </div>
       <div class="sidetab">
@@ -28,20 +28,20 @@ export function createGoalDisplay(goal) {
 
   document.querySelector('.sidetab__button:last-child')
           .addEventListener('click', send({goalStatus: true, status: "interrupted"}), true)
-}
 
-function sendMessage(data) {
-  chrome.runtime.sendMessage(data);
+  const goalBar = document.querySelector('.goal-bar')
+  document.querySelector('.time-bubble').addEventListener('mouseenter', switchClass(goalBar, 'u-fade-in', 'u-fade-out'))
+  document.querySelector('.time-bubble').addEventListener('mouseleave', switchClass(goalBar, 'u-fade-in', 'u-fade-out'))
 }
 
 function send(data) {
-  return () => sendMessage(data);
+  return () => chrome.runtime.sendMessage(data);
 }
 
-function toggle(node, klass) {
-  node.classList.toggle(klass)
-}
-
-function toggleClass(node, klass) {
-  return () => toggle(node, klass)
+function switchClass(node, firstClass, secondClass) {
+  return () => {
+    node.classList.contains(firstClass) ?
+      node.className = node.className.replace(firstClass, secondClass) :
+      node.className = node.className.replace(secondClass, firstClass)
+  }
 }
