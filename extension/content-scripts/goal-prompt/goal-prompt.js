@@ -3,11 +3,11 @@ import { deleteGoalPrompt } from './utils/delete-goal-prompt.js'
 
 let goalPrompt = {
   activated: false,
-  create() {
+  activate() {
     createGoalPrompt()
     this.activated = true
   },
-  delete() {
+  deactivate() {
     deleteGoalPrompt()
     this.activated = false
   }
