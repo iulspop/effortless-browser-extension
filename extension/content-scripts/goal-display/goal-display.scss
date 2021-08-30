@@ -1,7 +1,7 @@
 @import '../nudges.scss';
 
 #indistractable-extension {
-  & .display {
+  & .goal-bar {
     width: 100vw;
     height: 40px;
     padding: 5px 0 5px 0;
@@ -22,7 +22,7 @@
     animation-duration: .4s;
     animation-timing-function: ease-out;
 
-    &__description {
+    &__text {
       line-height: 1;
       padding: 0;
       margin: 0;

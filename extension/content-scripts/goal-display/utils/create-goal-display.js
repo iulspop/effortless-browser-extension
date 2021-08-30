@@ -1,14 +1,14 @@
 export function createGoalDisplay(goal) {
   const display = `
     <div id="indistractable-extension">
-      <div class="display" data-testid="goal-display">
-        <p class="display__description">${goal}</p>
+      <div class="goal-bar" data-testid="goal-display">
+        <p class="goal-bar__text">${goal}</p>
         <div>
-          <button class="display__button" data-testid="complete-button">Complete</button>
-          <button class="display__button" data-testid="interupt-button">Interrupted</button>
+          <button class="goal-bar__button" data-testid="complete-button">Complete</button>
+          <button class="goal-bar__button" data-testid="interupt-button">Interrupted</button>
         </div>
       </div>
-      <div class="time-bubble" data-testid="time-display">
+      <div class="time-bubble" data-testid="time-bubble">
         <time class="time-bubble__timer">
           <span id="minutes">99</span>:<span id="seconds">99</span>
         </time>
