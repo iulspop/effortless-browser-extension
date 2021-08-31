@@ -1,9 +1,5 @@
 export function createGoalDisplay(goal, countDown) {
-  let minutes = Math.floor(countDown / 60)
-  let seconds = Math.floor(countDown - (minutes * 60))
-  let [minutesString, secondsString] = [minutes, seconds].map(num => {
-    return num.toLocaleString('en-US', { minimumIntegerDigits: 2, useGrouping: false })
-  });
+  let [minutesString, secondsString] = calculateTimes(countDown)
   const display = `
     <div id="indistractable-extension">
       <div class="goal-bar u-fade-out">
@@ -21,12 +17,16 @@ export function createGoalDisplay(goal, countDown) {
       </div>
       <div class="time-bubble">
         <time class="time-bubble__timer">
-          <span id="minutes">${minutesString}</span>:<span id="seconds">${secondsString}</span>
+          <span id="ie-minutes">${minutesString}</span>:<span id="ie-seconds">${secondsString}</span>
         </time>
       </div>
     </div>
   `
   document.body.insertAdjacentHTML('beforeend', display)
+
+  const minutesSpan = document.querySelector('#ie-minutes')
+  const secondsSpan = document.querySelector('#ie-seconds')
+  startCountDown(countDown, updateTimes(minutesSpan, secondsSpan))
 
   document.querySelector('.sidetab__button:first-child')
           .addEventListener('click', send({goalStatus: true, status: "completed"}), true)
@@ -48,5 +48,33 @@ function switchClass(node, firstClass, secondClass) {
     node.classList.contains(firstClass) ?
       node.className = node.className.replace(firstClass, secondClass) :
       node.className = node.className.replace(secondClass, firstClass)
+  }
+}
+
+function startCountDown(secondsLeft, updateTimes) {
+  let intervalID = setInterval(() => {
+    let [minutesString, secondsString] = calculateTimes(secondsLeft)
+    updateTimes(minutesString, secondsString)
+
+    secondsLeft--
+    if (secondsLeft < 0) {
+      clearInterval(intervalID)
+      send({goalStatus: true, status: "completed"})()
+    }
+  }, 1000)
+}
+
+function calculateTimes(secondsLeft) {
+  let minutes = Math.floor(secondsLeft / 60)
+  let seconds = Math.floor(secondsLeft - (minutes * 60))
+  return [minutes, seconds].map(num => {
+    return num.toLocaleString('en-US', { minimumIntegerDigits: 2, useGrouping: false })
+  });
+}
+
+function updateTimes(minutesSpan, secondsSpan) {
+  return (minutesString, secondsString) => {
+    minutesSpan.textContent = minutesString
+    secondsSpan.textContent = secondsString
   }
 }

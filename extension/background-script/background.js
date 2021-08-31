@@ -13,8 +13,12 @@ chrome.webNavigation.onCompleted.addListener(details => {
     const send = messenger(details.tabId, details.frameId)
 
     chrome.storage.local.get(['goal', 'duration', 'startTime'], ({ goal, duration, startTime }) => {
-      const countDown = duration - ((new Date() - new Date(startTime)) / 1000)
-      goal ? send({goalActive: true, goal, countDown}) : send({goalActive: false})
+      if (goal) {
+        const countDown = duration - ((new Date() - new Date(startTime)) / 1000)
+        send({goalActive: true, goal, countDown})
+      } else {
+        send({goalActive: false})
+      }
     })
   })
 })
