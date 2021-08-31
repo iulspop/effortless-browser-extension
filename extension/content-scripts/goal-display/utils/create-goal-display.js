@@ -1,4 +1,9 @@
-export function createGoalDisplay(goal) {
+export function createGoalDisplay(goal, countDown) {
+  let minutes = Math.floor(countDown / 60)
+  let seconds = Math.floor(countDown - (minutes * 60))
+  let [minutesString, secondsString] = [minutes, seconds].map(num => {
+    return num.toLocaleString('en-US', { minimumIntegerDigits: 2, useGrouping: false })
+  });
   const display = `
     <div id="indistractable-extension">
       <div class="goal-bar u-fade-out">
@@ -16,7 +21,7 @@ export function createGoalDisplay(goal) {
       </div>
       <div class="time-bubble">
         <time class="time-bubble__timer">
-          <span id="minutes">99</span>:<span id="seconds">99</span>
+          <span id="minutes">${minutesString}</span>:<span id="seconds">${secondsString}</span>
         </time>
       </div>
     </div>

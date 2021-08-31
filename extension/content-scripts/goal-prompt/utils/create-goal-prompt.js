@@ -53,8 +53,9 @@ function getFormDataAndSendMessage() {
 
   const formData = new FormData(form)
   const userGoal = formData.get('goal')
+  const goalDuration = formData.get('time')
   if (typeof userGoal !== "string") { throw new Error('Failed to get form data') }
 
-  const data = {goalSet: true, goal: userGoal}
+  const data = {goalSet: true, goal: userGoal, time: goalDuration}
   chrome.runtime.sendMessage(data)
 }
