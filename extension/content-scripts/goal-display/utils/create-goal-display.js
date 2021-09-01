@@ -3,7 +3,7 @@ export function createGoalDisplay(goal, countDown) {
   const display = `
     <div id="indistractable-extension">
       <div class="goal-bar u-fade-out">
-        <p class="goal-bar__text">${goal}</p>
+        <p class="goal-bar__text"><strong>${goal}</strong></p>
       </div>
       <div class="sidetab">
         <button class="sidetab__button">
