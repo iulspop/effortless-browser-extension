@@ -1,4 +1,4 @@
-import { injectNudges, messenger } from './utils/utils.js'
+import { injectNudges, messenger, broadcaster } from './utils/utils.js'
 
 chrome.runtime.onInstalled.addListener(({ reason }) => {
   if (reason === "install") {
@@ -24,7 +24,7 @@ chrome.webNavigation.onCompleted.addListener(details => {
 })
 
 chrome.runtime.onMessage.addListener((message, sender) => {
-  const send = messenger(sender.tab.id, sender.frameId)
+  const broadcast = broadcaster(sender.frameId)
 
   if (message.goalSet === true) {
     const startTime = Date()
@@ -32,12 +32,11 @@ chrome.runtime.onMessage.addListener((message, sender) => {
     const countDown = goalDurationInSeconds
 
     chrome.storage.local.set({ goal: message.goal, duration: goalDurationInSeconds, startTime })
-
-    send({goalActive: true, goal: message.goal, countDown})
+    broadcast({goalActive: true, goal: message.goal, countDown})
   }
 
   if (message.goalStatus === true) {
     chrome.storage.local.remove("goal");
-    send({goalActive: false})
+    broadcast({goalActive: false})
   }
 })
