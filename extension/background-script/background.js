@@ -26,7 +26,7 @@ chrome.runtime.onMessage.addListener((message, sender) => {
 
   if (message.goalSet === true) {
     const startTime = Date()
-    const durationInMinutes = Number(message.time) / 60
+    const durationInMinutes = Number(message.time)
     const secondsLeft = secondsRemaining(startTime, durationInMinutes)
 
     chrome.storage.local.set({ goal: message.goal, durationInMinutes, startTime })
