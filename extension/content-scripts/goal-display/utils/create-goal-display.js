@@ -1,5 +1,5 @@
-export function createGoalDisplay(goal, countDown) {
-  let [minutesString, secondsString] = calculateTimes(countDown)
+export function createGoalDisplay(goal, secondsLeft) {
+  let [minutesString, secondsString] = calculateTimes(secondsLeft)
   const display = `
     <div id="indistractable-extension">
       <div class="goal-bar u-fade-out">
@@ -26,7 +26,7 @@ export function createGoalDisplay(goal, countDown) {
 
   const minutesSpan = document.querySelector('#ie-minutes')
   const secondsSpan = document.querySelector('#ie-seconds')
-  startCountDown(countDown, updateTimes(minutesSpan, secondsSpan))
+  startCountDown(secondsLeft, updateTimes(minutesSpan, secondsSpan))
 
   document.querySelector('.sidetab__button:first-child')
           .addEventListener('click', send({goalStatus: true, status: "completed"}), true)
@@ -59,7 +59,6 @@ function startCountDown(secondsLeft, updateTimes) {
     secondsLeft--
     if (secondsLeft < 0) {
       clearInterval(intervalID)
-      send({goalStatus: true, status: "completed"})()
     }
   }, 1000)
 }

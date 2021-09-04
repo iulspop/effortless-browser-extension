@@ -11,7 +11,7 @@ export function injectNudges(tabId, frameIds, callback) {
   injectScript('content-scripts/nudges.js', tabId, frameIds, callback)
 }
 
-export const messenger = (tabId, frameId) => message => {
+export const sender = (tabId, frameId) => message => {
   chrome.tabs.sendMessage(tabId, message, { frameId })
 }
 
@@ -26,3 +26,5 @@ export function broadcaster(frameId) {
     })
   }
 }
+
+export const secondsRemaining = (startTime, durationInMinutes) => ((durationInMinutes * 60) - ((new Date() - new Date(startTime)) / 1000))

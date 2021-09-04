@@ -3,7 +3,7 @@
   "description": "Augment your cognitive control abilities",
   "version": "1.0",
   "manifest_version": 3,
-  "permissions": [ "webNavigation", "scripting", "storage" ],
+  "permissions": [ "webNavigation", "scripting", "storage", "alarms" ],
   "host_permissions": ["<all_urls>"],
   "background": {
     "service_worker": "background.js"

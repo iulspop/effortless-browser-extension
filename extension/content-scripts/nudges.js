@@ -14,7 +14,7 @@ injectStylesheet('content-scripts/goal-display/goal-display.css')
 chrome.runtime.onMessage.addListener(message => {
   if (message.goalActive === true) {
     if (goalPrompt.activated) { goalPrompt.deactivate() }
-    goalDisplay.activate(message.goal, message.countDown)
+    goalDisplay.activate(message.goal, message.secondsLeft)
   }
   if (message.goalActive === false) {
     goalDisplay.deactivate()
