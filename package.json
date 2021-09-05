@@ -20,7 +20,7 @@
     "webpack-cli": "^4.7.2"
   },
   "scripts": {
-    "prod:build": "zip -r indistractable-extension.zip ./dev-build",
+    "prod:build": "zip -r effortless-browser-extension.zip ./dev-build",
     "dev:key": "bash generate-key.sh",
     "dev:build": "webpack --watch",
     "cy:open": "cypress open",
