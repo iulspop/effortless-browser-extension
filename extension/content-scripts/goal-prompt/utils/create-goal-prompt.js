@@ -5,7 +5,7 @@ export function createGoalPrompt() {
       <div class="prompt">
         <form class="form">
           <div class="question-1"><label class="form__label" for="ie-goal">What outcome do you seek?</label></div>
-          <div class="question-2 u-hidden"><label class="form__label" for="ie-time">How much time to hit that target?</label></div>
+          <div class="question-2 u-hidden"><label class="form__label" for="ie-time">How many minutes to hit that target?</label></div>
           <div class="form__input-container">
             <div class="question-1"><input class="form__input" type="text" id="ie-goal" name="goal"></div>
             <div class="question-2 u-hidden"><input class="form__input" type="number" id="ie-time" name="time"></div>
