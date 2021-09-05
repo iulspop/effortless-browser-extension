@@ -1,7 +1,12 @@
 {
-  "name": "Indistractable",
-  "description": "Augment your cognitive control abilities",
-  "version": "1.0",
+  "name": "Effortless - Make Focus Your Default",
+  "description": "Asks you to clarify what your focus is and to timebox that intention. As a result, you need less conscious control to stay focused.",
+  "icons": {
+    "16": "static/icons/logo-16.png",
+    "48": "static/icons/logo-48.png",
+   "128": "static/icons/logo-128.png"
+  },
+  "version": "0.1.0",
   "manifest_version": 3,
   "permissions": [ "webNavigation", "scripting", "storage", "alarms" ],
   "host_permissions": ["<all_urls>"],

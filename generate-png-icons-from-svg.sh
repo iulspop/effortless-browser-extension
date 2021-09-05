@@ -1,0 +1,1 @@
+for x in 16 48 128 ; do inkscape --export-png logo-${x}.png -w ${x} logo.svg ; done

@@ -5,8 +5,8 @@ import { injectStylesheet } from './utils/injectStylesheet.js'
 
 injectFont(`@font-face {
   font-family: "Lato";
-  src: url(${chrome.runtime.getURL('fonts/Lato-Regular.ttf')}) format("truetype"),
-       url(${chrome.runtime.getURL('fonts/Lato-Bold.ttf')}) format("truetype");
+  src: url(${chrome.runtime.getURL('static/fonts/Lato-Regular.ttf')}) format("truetype"),
+       url(${chrome.runtime.getURL('static/fonts/Lato-Bold.ttf')}) format("truetype");
 }`)
 injectStylesheet('content-scripts/goal-prompt/goal-prompt.css')
 injectStylesheet('content-scripts/goal-display/goal-display.css')
