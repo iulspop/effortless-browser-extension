@@ -1,3 +1,5 @@
+import { enableDrag } from '../../utils/enableDrag.js'
+
 export function createGoalDisplay(goal, secondsLeft) {
   let [minutesString, secondsString] = calculateTimes(secondsLeft)
   const display = `
@@ -27,6 +29,12 @@ export function createGoalDisplay(goal, secondsLeft) {
   const minutesSpan = document.querySelector('#ie-minutes')
   const secondsSpan = document.querySelector('#ie-seconds')
   startCountDown(secondsLeft, updateTimes(minutesSpan, secondsSpan))
+
+    document.querySelector('#indistractable-extension .sidetab')
+            .addEventListener('mousedown', enableDrag({enableX: false}))
+
+  document.querySelector('#indistractable-extension .time-bubble')
+          .addEventListener('mousedown', enableDrag({}))
 
   document.querySelector('.sidetab__button:first-child')
           .addEventListener('click', send({goalStatus: true, status: "completed"}), true)
