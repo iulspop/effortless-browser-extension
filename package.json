@@ -10,8 +10,10 @@
     "css-loader": "^6.2.0",
     "cypress": "^8.1.0",
     "http-server": "^13.0.0",
+    "jest": "^27.4.2",
     "mini-css-extract-plugin": "^2.2.0",
     "npm-run-all": "^4.1.5",
+    "pptr-testing-library": "^0.6.5",
     "puppeteer": "^12.0.1",
     "sass": "^1.37.5",
     "sass-loader": "^12.1.0",
@@ -30,8 +32,8 @@
     "test:serve": "npx http-server ./cypress/fixtures/",
     "test:setup": "npm-run-all --parallel test:build test:serve",
     "test:e2e": "start-server-and-test test:setup 8080 cy:open",
-    "pup:open": "node puppet.js",
-    "test:e2ev2": "start-server-and-test test:setup 8080 pup:open"
+    "jest:start": "jest",
+    "test:e2ev2": "start-server-and-test test:setup 8080 jest:start"
   },
   "repository": {
     "type": "git",
