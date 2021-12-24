@@ -4,11 +4,9 @@
   "description": "",
   "main": "index.js",
   "devDependencies": {
-    "@testing-library/cypress": "^8.0.0",
     "clean-webpack-plugin": "^4.0.0-alpha.0",
     "copy-webpack-plugin": "^9.0.1",
     "css-loader": "^6.2.0",
-    "cypress": "^8.1.0",
     "http-server": "^13.0.0",
     "jest": "^27.4.2",
     "mini-css-extract-plugin": "^2.2.0",
@@ -26,14 +24,11 @@
     "prod:build": "zip -r effortless-browser-extension.zip ./dev-build",
     "dev:key": "bash generate-key.sh",
     "dev:build": "webpack --watch",
-    "cy:open": "cypress open",
+    "test:start": "jest",
     "test:build": "webpack --watch --env testing",
-    "test:serve-secure": "npx http-server ./cypress/fixtures/ -S -K ./cypress/fixtures/ssl/key.pem -C ./cypress/fixtures/ssl/cert.pem",
-    "test:serve": "npx http-server ./cypress/fixtures/",
-    "test:setup": "npm-run-all --parallel test:build test:serve",
-    "test:e2e": "start-server-and-test test:setup 8080 cy:open",
-    "jest:start": "jest",
-    "test:e2ev2": "start-server-and-test test:setup 8080 jest:start"
+    "test:serve-secure": "npx http-server ./e2e/fixtures/ -S -K ./e2e/fixtures/ssl/key.pem -C ./e2e/fixtures/ssl/cert.pem",
+    "test:setup": "npm-run-all --parallel test:build test:serve-secure",
+    "test:e2e": "start-server-and-test test:setup 8080 jest:start"
   },
   "repository": {
     "type": "git",
