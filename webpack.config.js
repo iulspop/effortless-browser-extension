@@ -6,8 +6,6 @@ const path = require('path')
 const exec = require('child_process').exec
 const createEntryPoints = require('./createEntryPoints')
 
-const isTest = process.argv.includes('testing')
-
 config = {
   mode: 'production',
   optimization: { minimize: false },
@@ -58,19 +56,6 @@ config = {
       },
     },
   ],
-}
-
-if (isTest) {
-  config.output.path = path.resolve(__dirname, 'test-build')
-  config.module.rules.push({
-    test: /background\.js$/,
-    loader: 'string-replace-loader',
-    options: {
-      search: /(?<=^.*)/,
-      replace: 'import "../../e2e/extension-command-listener.js"\n',
-      strict: true,
-    },
-  })
 }
 
 module.exports = config

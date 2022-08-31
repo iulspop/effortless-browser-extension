@@ -25,9 +25,8 @@
     "dev:key": "bash generate-key.sh",
     "dev:build": "webpack --watch",
     "test:start": "jest",
-    "test:build": "webpack --watch --env testing",
     "test:serve-secure": "npx http-server ./e2e/fixtures/ -S -K ./e2e/fixtures/ssl/key.pem -C ./e2e/fixtures/ssl/cert.pem",
-    "test:setup": "npm-run-all --parallel test:build test:serve-secure",
+    "test:setup": "npm-run-all --parallel dev:build test:serve-secure",
     "test:e2e": "start-server-and-test test:setup 8080 jest:start"
   },
   "repository": {
