@@ -11,7 +11,7 @@ config = {
   optimization: { minimize: false },
   entry: createEntryPoints('./extension'),
   output: {
-    path: path.resolve(__dirname, 'dev-build'),
+    path: path.resolve(__dirname, 'build'),
   },
   module: {
     rules: [

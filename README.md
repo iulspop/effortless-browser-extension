@@ -16,7 +16,7 @@ To load the extension in the browser & test it manually, follow these steps:
    1. `npm install`
    2. `npm run dev:build`
    - Note: Normally an extension folder can be loaded unpacked without a build. However since the project uses SCSS & ES Modules features, we need to transpile the code using Webpack to JS the browser understands.
-4. Go back to the "Manage Extensions" page. Select "Load unpacked", then select the `dev-build` folder which Webpack compiled the extension folder to
+4. Go back to the "Manage Extensions" page. Select "Load unpacked", then select the `build` folder which Webpack compiled the extension folder to
 5. The extension should be loaded into the browser and active!
    - Note: If you make changes to the code, Webpack will recompile the extension automatically, but the browser will not reload the files. For code changes to take effect, you must click the reload button on the bottom right of the extension card in the "Manage Extensions" page.
    - Note: If you make changes to the code, reload & find behavior of the extension doesn't reflect the changes to the code, then check if Webpack is compiling without error.
@@ -26,5 +26,6 @@ To load the extension in the browser & test it manually, follow these steps:
 Currently, only E2E tests are configured with Puppeteer. Currently they're not helpful since they're inconsistent, so stick with manual tests. Eventually I'll improve them and add unit and integration tests.
 
 To run the E2E tests:
+
 1. Install packages `npm install`
 2. Run `npm test:e2e`

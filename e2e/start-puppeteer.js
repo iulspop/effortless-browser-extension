@@ -2,7 +2,7 @@ const puppeteer = require('puppeteer')
 const extensionCommands = require('./extension-commands.js')
 
 async function startPuppeteer({ pageUrl }) {
-  const pathToExtension = require('path').join(__dirname, '../dev-build')
+  const pathToExtension = require('path').join(__dirname, '../build')
   const browser = await puppeteer.launch({
     headless: false,
     args: [`--disable-extensions-except=${pathToExtension}`, `--load-extension=${pathToExtension}`],
