@@ -23,8 +23,8 @@ To load the extension in the browser & test it manually, follow these steps:
 
 ### How to run the tests?
 
-I put lot of effort into creating e2e tests with cypress, but there were certain limitations there, so I switched to using puppeteer and apparently that worked. But the notes I took about the procress were sparse and unorganized, so I'll have to relearn some stuff what happened there.
+Currently, only E2E tests are configured with Puppeteer. Currently they're not helpful since they're inconsistent, so stick with manual tests. Eventually I'll improve them and add unit and integration tests.
 
-What I recall is that setting up reliable e2e tests for the browser is very difficult and that I should focus more on unit tests and stay content with manual testing.
-
-Currently I haven't figured out how to run the e2e tests again since I didn't update the docs after switching from cypress to puppeteer :(
+To run the E2E tests:
+1. Install packages `npm install`
+2. Run `npm test:e2e`
