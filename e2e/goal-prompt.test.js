@@ -63,8 +63,4 @@ describe('Goal Prompt Popup', () => {
   //       .then(async $el => await $el.isIntersectingViewport())
   //   ).toBe(true)
   // })
-
-  afterAll(async () => {
-    // await browser.close()
-  })
 })
