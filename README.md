@@ -23,7 +23,7 @@ To load the extension in the browser & test it manually, follow these steps:
 
 ### How to run the tests?
 
-Currently, only E2E tests are configured with Puppeteer. Currently they're not helpful since they're inconsistent, so stick with manual tests. Eventually I'll improve them and add unit and integration tests.
+E2E tests are configured with Puppeteer.
 
 To run the E2E tests:
 
