@@ -15,9 +15,11 @@ describe('Goal Prompt Popup', () => {
     $document = await page.getDocument(page)
   })
 
+  const goalText = 'Learn just enough from Cypress docs so I can write my tests'
+
   test('A goal is not set and the user visits a page', async () => {
     const $input1 = await $document.findByLabelText(/what outcome do you seek?/i)
-    await $input1.type('Learn just enough from Cypress docs so I can write my tests')
+    await $input1.type(goalText)
 
     const $submit = await $document.$('#indistractable-extension').then(async $el => await $el.findByRole('button'))
     await $submit.click()
@@ -29,38 +31,30 @@ describe('Goal Prompt Popup', () => {
 
     expect(
       await $document
-        .findByText('Learn just enough from Cypress docs so I can write my tests')
+        .findByText(goalText)
         .then(async $el => await $el.isIntersectingViewport())
     ).toBe(true)
   })
 
-  // test('A goal is set and the user visits a page', async () => {
-  //   const goalText = 'Learn just enough from Cypress docs so I can write my tests'
+  // test('Complete button works', async () => {
   //   await extension.setStorage({ goal: goalText })
   //   await page.reload()
   //   $document = await page.getDocument(page)
 
-  //   const $complete = await $document.findByRole('button', { name: /complete/i })
-  //   $complete.click()
+  //   const $complete = await $document.findByRole('button', { name: /complete/i }, { timeout: 2000 })
+  //   await $complete.click()
 
-  //   expect(await $document.findByText(goalText)).toEqual(null)
-  //   expect(
-  //     await $document
-  //       .findByLabelText(/what outcome do you seek?/i)
-  //       .then(async $el => await $el.isIntersectingViewport())
-  //   ).toBe(true)
+  //   expect(await $document.findByLabelText(/what outcome do you seek?/i, { timeout: 2000 })).toBeTruthy()
+  // })
 
+  // test('Interrupt button works', async () => {
   //   await extension.setStorage({ goal: goalText })
   //   await page.reload()
+  //   $document = await page.getDocument(page)
 
-  //   const $interrupt = await $document.findByRole('button', { name: /interrupt/i })
-  //   $interrupt.click()
+  //   const $interrupt = await $document.findByRole('button', { name: /interrupt/i }, { timeout: 2000 })
+  //   await $interrupt.click()
 
-  //   expect(await $document.findByText(goalText)).toEqual(null)
-  //   expect(
-  //     await $document
-  //       .findByLabelText(/what outcome do you seek?/i)
-  //       .then(async $el => await $el.isIntersectingViewport())
-  //   ).toBe(true)
+  //   expect(await $document.findByLabelText(/what outcome do you seek?/i, { timeout: 2000 })).toBeTruthy()
   // })
 })

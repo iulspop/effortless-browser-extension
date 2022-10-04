@@ -1,5 +1,5 @@
 module.exports = {
-  verbose: true,
+  verbose: false,
   rootDir: 'e2e',
   testTimeout: 60000,
 };

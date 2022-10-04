@@ -8,13 +8,13 @@ export function createGoalDisplay(goal, secondsLeft) {
         <p class="goal-bar__text"><strong>${goal}</strong></p>
       </div>
       <div class="sidetab">
-        <button class="sidetab__button">
+        <button class="sidetab__button" aria-labelledby="complete-label">
           <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M20.285 2l-11.285 11.567-5.286-5.011-3.714 3.716 9 8.728 15-15.285z"/></svg>
-          <span class="sidetab__button__label">Complete</span>
+          <span class="sidetab__button__label" id="complete-label">Complete</span>
         </button>
-        <button class="sidetab__button">
+        <button class="sidetab__button" aria-labelledby="interrupt-label">
           <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M12 8v-5l9 9-9 9v-5h-12v-8h12zm12-4h-3v16h3v-16z"/></svg>
-          <span class="sidetab__button__label">Interrupt</span>
+          <span class="sidetab__button__label" id="interrupt-label">Interrupt</span>
         </button>
       </div>
       <div class="time-bubble">
